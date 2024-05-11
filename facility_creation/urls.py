@@ -4,6 +4,7 @@ from . import views
 
 
 urlpatterns = [
+    path('add_region', views.add_region, name="add_region"),
     
     
     # Authentication URLs ------------------------------------------------#

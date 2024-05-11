@@ -13,7 +13,7 @@
               <h3 class="text-lg font-semibold mb-2">Add new org unit</h3>
               <a
                 class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
-                href="#"
+                href="{% url 'add_region' %}"
                 >Add</a
               >
             </div>
@@ -67,7 +67,7 @@
               </ul>
             </td>
             <td class="border px-4 py-2">{{ region.date_created }}</td>
-            <td class="border px-4 py-2">{{ region.created_by.first_name }} {{ region.created_by.last_name }}</td>
+            <td class="border px-4 py-2">{{ region.created_by.first_name }} {{ region.created_by }}</td>
           </tr>
           {% endfor %}
         </tbody>
