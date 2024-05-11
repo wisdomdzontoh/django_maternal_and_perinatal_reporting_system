@@ -4,6 +4,7 @@ from . forms import CreateUserForm, LoginForm
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout #authentication models views
 from django.contrib.auth.decorators import login_required
+from facility_creation.models import Region, District, Facility
 
 # Create your views here.
 def homepage(request):
@@ -58,3 +59,17 @@ def user_logout(request):
 @login_required(login_url="my-login")
 def dashboard(request):
     return render(request, 'authentication/dashboard.html')
+
+
+
+@login_required(login_url="my-login")
+def dashboard(request):
+    total_facilities = Facility.objects.count()
+    total_districts = District.objects.count()
+    
+    context = {
+        "total_districts": total_districts,
+        "total_facilities": total_facilities,
+        
+    }
+    return render(request, 'authentication/dashboard.html', context)

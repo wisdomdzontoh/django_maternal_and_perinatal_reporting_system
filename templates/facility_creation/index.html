@@ -1,22 +1,50 @@
 {% extends 'authentication/dashboard_base.html' %} {% block body %}
 
-<body class="bg-gray-100">
+    <!-- Health Informatics Module -->
+    <div class="container mx-auto mt-8 px-4">
+        <h2 class="text-2xl font-semibold mb-4">Dashboard Overview</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- Add ORG-UNIT Card -->
+          <div
+            class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+          >
+            <div>
+              <i class="fa-solid fa-plus text-yellow-500 text-3xl"></i>
+              <h3 class="text-lg font-semibold mb-2">Add new org unit</h3>
+              <a
+                class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
+                href="#"
+                >Add</a
+              >
+            </div>
+          </div>
+        </div>
+
+
+
   <div class="container mx-auto py-8">
     <h1 class="text-2xl font-bold mb-4">Regions, Districts, and Facilities</h1>
     <div class="mb-4">
-        <form method="GET">
-          <input type="text" name="q" placeholder="Search regions..." value="{{ query }}">
-          <button type="submit">Search</button>
+        <form method="GET" class="flex items-center">
+            <input type="text" name="q" placeholder="Search regions, districts, and facilities..." value="{{ query }}"
+                class="border border-gray-300 rounded-md py-2 px-4 mr-2 focus:outline-none focus:border-blue-500">
+            <button type="submit"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:bg-blue-600">
+                Search
+            </button>
         </form>
+       
       </div>
     <div class="overflow-x-auto">
-      <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <table class="w-full bg-white shadow-md rounded-lg overflow-hidden text-center">
         <thead class="bg-gray-200">
           <tr>
             <th class="px-4 py-2">Region Name</th>
             <th class="px-4 py-2">Districts</th>
             <th class="px-4 py-2">Facilities</th>
-            <th class="px-4 py-2">Date Created</th>
+            <th class="px-4 py-2">Date Region Created</th>
+            <th class="px-4 py-2">Region Created by</th>
+
           </tr>
         </thead>
         <tbody>
@@ -39,6 +67,7 @@
               </ul>
             </td>
             <td class="border px-4 py-2">{{ region.date_created }}</td>
+            <td class="border px-4 py-2">{{ region.created_by.first_name }} {{ region.created_by.last_name }}</td>
           </tr>
           {% endfor %}
         </tbody>
