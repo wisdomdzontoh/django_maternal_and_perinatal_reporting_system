@@ -1,0 +1,49 @@
+{% extends 'authentication/dashboard_base.html' %} {% block body %}
+
+<body class="bg-gray-100">
+  <div class="container mx-auto py-8">
+    <h1 class="text-2xl font-bold mb-4">Regions, Districts, and Facilities</h1>
+    <div class="mb-4">
+        <form method="GET">
+          <input type="text" name="q" placeholder="Search regions..." value="{{ query }}">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    <div class="overflow-x-auto">
+      <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="px-4 py-2">Region Name</th>
+            <th class="px-4 py-2">Districts</th>
+            <th class="px-4 py-2">Facilities</th>
+            <th class="px-4 py-2">Date Created</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for region in regions %}
+          <tr>
+            <td class="border px-4 py-2">{{ region.region_name }}</td>
+            <td class="border px-4 py-2">
+              <ul>
+                {% for district in region.district_set.all %}
+                <li>{{ district.district_name }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+            <td class="border px-4 py-2">
+              <ul>
+                {% for district in region.district_set.all %}
+                <i> {% for facility in district.facility_set.all %}<i>
+                <li>{{ facility.facility_name }}</li>
+                {% endfor %} {% endfor %}
+              </ul>
+            </td>
+            <td class="border px-4 py-2">{{ region.date_created }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+{% endblock %}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'facility_creation',
     
     'tailwind', #tailwind library
     'theme',
