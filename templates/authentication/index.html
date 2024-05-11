@@ -1,0 +1,97 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maternal deaths and Perinatal deaths management system</title>
+    {% tailwind_css %}
+    <style>
+      /* Custom styles */
+      .card-image {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-purple-600 py-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-white text-2xl font-semibold">
+          Maternal deaths and Perinatal deaths management system
+        </h1>
+        <a href="{% url 'my-login' %}" class="text-white text-lg">Login</a>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mx-auto py-8">
+      <h1 class="text-3xl font-bold text-center mb-4">
+        Welcome to Our Maternal deaths and Perinatal deaths management system
+      </h1>
+      <p class="text-lg text-gray-700 text-center mb-8">
+        Explore our modules and features tailored to your healthcare needs
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card 1: Electronic Health Records -->
+        <div class="bg-white rounded-lg shadow-md">
+          <div
+            class="card-image"
+            style="background-image: url('{% static 'images/EMR.jpg' %}')"
+          ></div>
+          <div class="p-6">
+            <h2 class="text-xl font-semibold mb-4">
+              Maternal deaths reporting (MDR)
+            </h2>
+            <p class="text-gray-700">
+              The MDR module allows healthcare providers to digitally record and
+              store patient health information, including medical history,
+              diagnoses, medications, allergies, and laboratory test results.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2: Appointment Scheduling -->
+        <div class="bg-white rounded-lg shadow-md">
+          <div
+            class="card-image"
+            style="
+              background-image: url('{% static 'images/appointment.jpg' %}');
+            "
+          ></div>
+          <div class="p-6">
+            <h2 class="text-xl font-semibold mb-4">
+              Perinatal Deaths Reporting
+            </h2>
+            <p class="text-gray-700">
+              The Appointment Scheduling module streamlines the process of
+              booking and managing patient appointments, improving clinic
+              efficiency and reducing wait times.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3: Billing and Invoicing -->
+        <div class="bg-white rounded-lg shadow-md">
+          <div
+            class="card-image"
+            style="background-image: url('{% static 'images/billing.jpg' %}')"
+          ></div>
+          <div class="p-6">
+            <h2 class="text-xl font-semibold mb-4">Billing and Invoicing</h2>
+            <p class="text-gray-700">
+              The Billing and Invoicing module automates the process of
+              generating invoices for patient visits, procedures, and services
+              rendered, ensuring accurate and timely billing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

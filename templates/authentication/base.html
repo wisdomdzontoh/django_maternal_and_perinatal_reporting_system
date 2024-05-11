@@ -1,0 +1,89 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    {% tailwind_css %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-...replace_with_integrity_code_here...="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      .profile-dropdown {
+        display: none;
+        background-color: #fff;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        z-index: 10;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        transition: all 0.3s;
+      }
+
+      .profile:hover .profile-dropdown {
+        display: block;
+      }
+
+      .profile:hover .profile-dropdown {
+        background-color: #f9fafb;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-purple-600 p-4">
+      <div class="flex justify-between items-center">
+        <a href="{% url 'dashboard' %}">
+        <h1 class="text-white text-xl font-bold">
+          DWM HEALTH MANAGEMENT SYSTEM
+        </h1>
+      </a>
+      <ul class="flex space-x-8">
+        <li><a href="{% url 'patient-records' %}" class="p-4 rounded-md bg-purple-700 hover:bg-purple-600 text-white"><i class="fa fa-home"></i></a>
+        <li><a href="#features" class="p-4 bg-transparent hover:bg-blue-700 rounded-full text-yellow-300 hover:text-white">Features</a></li>
+        <li><a href="#features" class="p-4 bg-transparent hover:bg-blue-700 rounded-full text-yellow-300 hover:text-white">System updates</a></li>
+        
+        <!--notification-->
+        
+  <!--profile icon-->
+
+  <a class="bg-red-500 text-white py-2 px-4 rounded-md cursor-pointer" href="{% url 'my-login' %}">Login</a>
+</div>
+</div>
+    </nav>
+
+    <div id="loader-container">
+      <div id="loader"></div>
+      <h3 class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">loading...</h3>
+   </div>
+
+
+
+
+  
+    {% block body %}
+        {% endblock %}
+
+        <script>
+          document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+          })
+
+
+          // Function to hide the loader after 2 seconds
+   function hideLoader() {
+    var loaderContainer = document.getElementById("loader-container");
+    loaderContainer.style.display = "none";
+}
+
+// Add an event listener to call hideLoader after 2 seconds
+    window.addEventListener("load", function () {
+        setTimeout(hideLoader, 2000); // 2000 milliseconds = 2 seconds
+});
+        </script>

@@ -1,0 +1,89 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <title>Login Page</title>
+    {% tailwind_css %}
+  </head>
+  <body class="bg-gray-300">
+    <!-- Image Card -->
+
+    {% for message in messages %}
+    <div class="message text-center alert alert-info {{ message.tags }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+
+    <div class="container mx-auto mt-8">
+      <div
+        class="max-w-lg mx-auto bg-white shadow-md rounded-lg overflow-hidden"
+      >
+        <img
+          class="w-full h-64 object-cover object-center"
+          src="{% static '/images/hospital-logo.jpg' %}"
+          alt="Image"
+        />
+        <div class="p-6">
+          <h2 class="text-2xl font-semibold mb-4">Welcome Back!</h2>
+          <!-- Login Form -->
+          <div class="container mx-auto mt-8">
+            <h1 class="text-2xl font-semibold mb-4">Login Here</h1>
+
+            <form method="POST" autocomplete="off" class="space-y-5">
+              {% csrf_token %}
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
+                  />Username:</label
+                >
+                <input type="text" name="username" id="username"
+                autocomplete="username" class="mt-1 block w-full py-2 px-3
+                text-base leading-6 border border-gray-300 rounded-md shadow-sm
+                focus>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700"
+                  />Password:</label
+                >
+                <input type="password" name="password" id="password" class="mt-1
+                block w-full py-2 px-3 text-base leading-6 border
+                border-gray-300 rounded-md shadow-sm focus"/>
+              </div>
+              <input
+                type="submit"
+                value="Login"
+                class="bg-blue-500 hover:bg-green-500 text-white py-2 px-4 rounded-md cursor-pointer"
+              />
+            </form>
+            <div>
+              Forgot password?
+              <a
+                href="{% url 'reset_password' %}"
+                class="font-medium hover:underline"
+                >Reset password.</a
+              >
+            </div>
+            <div>
+              <a href="{% url '' %}" class="font-medium hover:underline"
+                >Home.</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </body>
+</html>
