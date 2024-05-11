@@ -1,0 +1,187 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    {% tailwind_css %}
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-...replace_with_integrity_code_here...="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!--calender input field library-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <style>
+
+      /* Loader Styles */
+   #loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#loader {
+    border: 7px solid #3498db;
+    border-top: 7px solid #f1f1f1;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+
+
+      /**pagination css**/
+      .btn-pagination {
+        padding: 0.5rem 1rem;
+        background-color: #4a90e2;
+        color: #ffffff;
+        border: none;
+        border-radius: 0.25rem;
+        transition: background-color 0.3s;
+        margin-right: 0.5rem; /* Add spacing here */
+    }
+    
+    .btn-pagination:hover {
+        background-color: #357db5;
+    }
+
+
+      .profile-dropdown {
+        display: none;
+        background-color: #fff;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        z-index: 10;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        transition: all 0.3s;
+      }
+
+      .profile:hover .profile-dropdown {
+        display: block;
+      }
+
+      .profile:hover .profile-dropdown {
+        background-color: #f9fafb;
+      }
+
+      .highlight {
+        background-color: yellow;
+        font-weight: bold;
+    }
+    
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-purple-600 p-4">
+      <div class="flex justify-between items-center">
+        <a href="{% url 'dashboard' %}">
+        <h1 class="text-white text-xl font-bold">
+            Maternal and Perinatal Death Reporting System
+        </h1>
+      </a>
+      
+      <ul class="flex space-x-8">
+        <li><a href="{% url 'dashboard' %}" class="p-4 rounded-md bg-purple-700 hover:bg-purple-600 text-white"><i class="fa fa-home"></i></a>
+        <li><a href="#features" class="p-4 bg-transparent hover:bg-blue-700 rounded-full text-yellow-300 hover:text-white">Features</a></li>
+        <li><a href="#features" class="p-4 bg-transparent hover:bg-blue-700 rounded-full text-yellow-300 hover:text-white">System updates</a></li>
+        
+        <!--notification-->
+        <div class="flex items-center">
+          <div class="profile relative mr-4">
+            
+            <img
+              src="{% static 'images/notification.png' %}"
+              alt="notification Image"
+              class="rounded-full w-10 h-10 cursor-pointer"
+            />
+            
+          </div>
+           
+            
+       
+  <!--profile icon-->
+  <div class="mt-0">
+    <input type="text" id="navSearch" class="w-full rounded-md py-2 px-4 bg-gray-800 text-gray-100" placeholder="Search...">
+</div>
+
+<div class="flex items-center">
+  <div class="profile relative mr-4">
+    <img
+      src="{% static 'images/user.png' %}"
+      alt="Profile Image"
+      class="rounded-full w-10 h-10 cursor-pointer"
+    />
+    <div class="profile-dropdown absolute shadow-md rounded-md py-2 right-0 mt-2 w-48">
+      <p class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">
+        <i class="fas fa-user mr-2"></i>{{ user.username }}
+      </p>
+      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">View Profile</a>
+      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">Update Profile</a>
+      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">Reset Password</a>
+      <a href="{% url 'user-logout' %}" 
+      class="block px-4 py-2  hover:bg-purple-600 hover:text-white text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+      onclick="return confirm('Are you sure you want to logout?')"
+      >Logout</a>
+      
+    </div>
+  </div>
+</div>
+</div>
+    </nav>
+    
+  
+
+    {% block body %}
+        {% endblock %}
+
+
+        <script>
+          /*
+          const searchInput = document.getElementById('searchInput');
+      
+          searchInput.addEventListener('input', function() {
+              const searchText = this.value.toLowerCase();
+              const bodyText = document.body.textContent.toLowerCase();
+      
+              if (searchText.trim() === '') {
+                  // If search input is empty, remove any filtering applied to the body content
+                  document.body.style.removeProperty('filter');
+              } else {
+                  // If search input is not empty, filter and highlight matching content
+                  const regex = new RegExp(searchText, 'gi');
+                  document.body.style.filter = ''; // Remove any existing filter
+                  document.body.innerHTML = bodyText.replace(regex, match => `<span class="highlight">${match}</span>`);
+              }
+          });
+          */
+      </script>
+      
+      
