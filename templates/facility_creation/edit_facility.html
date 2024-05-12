@@ -1,0 +1,150 @@
+{% extends 'authentication/dashboard_base.html' %} 
+{% block body %}
+
+
+    <!-- Add ORG-UNIT Card -->
+    <div
+      class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+    >
+      <div>
+        <a
+          class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
+          href="{% url 'facility_creation' %}"
+          >View all</a
+        >
+      </div>
+    </div>
+
+
+
+
+    <!--Edit FACILITY-->
+    <div class="w-1/2 p-4">
+        <div class="card bg-white rounded-lg shadow-md">
+          <h2 class="text-2xl font-bold mb-4">
+            <i class="fas fa-calendar-plus text-blue-500"></i> Edit Facility
+          </h2>
+          {% if messages %}
+      <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Success!',
+                  text: '{{ message }}',
+                  confirmButtonText: 'OK'
+              }).then(function () {
+                  window.location.href = '{% url 'view-all-facilities' %}';
+              });
+          });
+        </script>
+        {% endfor %}
+      </div>
+      {% else %}
+          <form class="shadow-md bg-white rounded-2xl p-4" method="POST">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="facility_region">Region Name</label>
+                <select name="facility_region" id="facility_region" class="w-full bg-gray-100 rounded-md border border-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-500">
+                    {% for region in regions %}
+                        <option value="{{ region.id }}" {% if facility.facility_region_id == region.id %} selected {% endif %}>{{ region.region_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- District dropdown -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="facility_district">District Name</label>
+                <select name="facility_district" id="facility_district" class="w-full bg-gray-100 rounded-md border border-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-500">
+                    <!-- Options will be populated dynamically via AJAX -->
+                </select>
+            </div>
+              <!--end of district dropdown-->
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="district_name">Facility Name</label>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="facility_name" name="facility_name" type="text" placeholder="Enter facility name" value="{{ facility.facility_name }}" required />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="district_code">Facility Code</label>
+              <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="facility_code" name="facility_code" placeholder="Enter facility code">{{ facility.facility_code }}</textarea>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="date_created">Date of creation</label>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date_created" type="date" name="date_created" value="{{ facility.date_created|date:'Y-m-d' }}" placeholder="select date" required />
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="created_by">Created By</label>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="created_by" type="text" value="{{ facility.created_by }}" name="created_by" readonly required />
+            </div>
+            <div class="flex items-center justify-center">
+              <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Update Facility</button>
+            </div>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+      
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+<script>
+    $(document).ready(function() {
+        // Function to fetch districts based on selected region
+        function fetchDistricts(regionId) {
+            $.ajax({
+                url: "{% url 'get_districts' %}", // URL to fetch districts
+                type: "GET",
+                data: {
+                    region_id: regionId,
+                },
+                success: function(response) {
+                    // Clear previous options
+                    $('#facility_district').empty();
+                    
+                    // Add new options for districts
+                    $.each(response.districts, function(index, district) {
+                        $('#facility_district').append($('<option>', {
+                            value: district.id,
+                            text: district.district_name
+                        }));
+                    });
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log("Error:", errmsg);
+                    // Handle error if needed
+                }
+            });
+        }
+
+        // Event listener for region dropdown change
+        $('#facility_region').on('change', function() {
+            var selectedRegionId = $(this).val();
+            fetchDistricts(selectedRegionId);
+        });
+    });
+</script>
+
+
+
+<script>
+  flatpickr("#date_created", {
+    dateFormat: "Y-m-d", // Set the date format
+    // You can customize other options as needed
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    // Initialize select2 for district region selection
+    $("#district_region").select2();
+    $("#facility_region").select2();
+    $("#facility_district").select2();
+
+  });
+</script>
+{% endblock %}
+</body>
