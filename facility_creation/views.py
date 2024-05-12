@@ -159,9 +159,9 @@ def edit_facility(request, id):
         facility.created_by = created_by
         
         facility.save()  # Save the changes
-        
         messages.success(request, 'Facility updated successfully.')
-        return redirect('view-all-facilities')  # Redirect to the same page after successful submission
+          # Redirect to the same page after successful submission
+
    
     return render(request, 'facility_creation/edit_facility.html', context)
 
@@ -175,6 +175,7 @@ def delete_facility(request, id):
     if request.method == 'POST':
         facilities = Facility.objects.get(pk=id)
         facilities.delete()
+        messages.success(request, 'Facility deleted successfully.')
         return redirect('view-all-facilities')          
 
 

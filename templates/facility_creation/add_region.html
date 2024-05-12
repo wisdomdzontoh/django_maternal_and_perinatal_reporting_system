@@ -12,6 +12,16 @@
           href="{% url 'facility_creation' %}"
           >View all</a
         >
+        <a
+          class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
+          href="{% url 'view-all-facilities' %}"
+          >Delete Org unit</a
+        >
+        <a
+          class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
+          href="{{ request.META.HTTP_REFERER }}"
+          >Go back</a
+        >
       </div>
     </div>
 
@@ -57,6 +67,8 @@
   </div>
 
 
+
+<!--ADD DISTRICT-->
   <div class="w-1/2 p-4">
     <div class="card bg-white rounded-lg shadow-md">
       <h2 class="text-2xl font-bold mb-4">
@@ -117,6 +129,8 @@
 
 
 
+
+<!--ADD FACILITY-->
   <div class="w-1/2 p-4">
     <div class="card bg-white rounded-lg shadow-md">
       <h2 class="text-2xl font-bold mb-4">

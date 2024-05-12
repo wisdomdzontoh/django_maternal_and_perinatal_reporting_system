@@ -14,9 +14,14 @@
         >View all Org Unit</a
       >
       <a
-        class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
+        class="bg-green-500 inline-block px-4 py-2 text-sm text-white rounded"
         href="{% url 'add_region' %}"
         >Create Org Unit</a
+      >
+      <a
+        class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
+        href="{{ request.META.HTTP_REFERER }}"
+        >Go back</a
       >
     </div>
     <!-- Filter Form -->
@@ -48,6 +53,26 @@
     </div>
   </div>
 </div>
+
+{% if messages %}
+<div class="alert alert-success" role="alert">
+  {% for message in messages %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ message }}',
+            confirmButtonText: 'OK'
+        }).then(function () {
+            window.location.href = '{% url 'view-all-facilities' %}';
+        });
+    });
+  </script>
+  {% endfor %}
+</div>
+{% else %}
 
 <div class="container mx-auto mt-8">
   <table
@@ -86,7 +111,7 @@
     <!-- Table Body -->
     <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
       <!-- Table Rows (Rendered by Django) -->
-      {% for facility in facilities %}
+      {% if facilities %} {% for facility in facilities %}
       <tr>
         <td class="px-6 py-4 whitespace-no-wrap">
           {{ facility.facility_region }}
@@ -125,9 +150,13 @@
           </form>
         </td>
       </tr>
-      {% endfor %}
+      {% endfor %} {% else %}
+      <tr>
+        <td colspan="5" class="py-8 px-2 text-center">No facilities found</td>
+      </tr>
+      {% endif %}
     </tbody>
   </table>
 </div>
 
-{% endblock %}
+{% endif %} {% endblock %}

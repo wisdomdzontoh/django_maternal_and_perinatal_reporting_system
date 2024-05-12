@@ -16,7 +16,12 @@
       <a
         class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
         href="{% url 'view-all-facilities' %}"
-        >Delete Org Unit</a
+        >Facilities</a
+      >
+      <a
+        class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
+        href="{{ request.META.HTTP_REFERER }}"
+        >Go back</a
       >
     </div>
   </div>
