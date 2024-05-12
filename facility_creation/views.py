@@ -13,6 +13,10 @@ def index(request):
     regions = Region.objects.prefetch_related('district_set__facility_set').all()
     districts = District.objects.prefetch_related('facility_set').all()
     facilities = Facility.objects.all()
+
+    total_facilities = Facility.objects.count()
+    total_districts = District.objects.count()
+    total_regions = Region.objects.count()
     
     if query:
         regions = regions.filter(region_name__icontains=query)
@@ -24,6 +28,9 @@ def index(request):
         'districts': districts,
         'facilities': facilities,
         'query': query,
+        "total_districts": total_districts,
+        "total_facilities": total_facilities,
+        "total_regions": total_regions,
     }
     return render(request, 'facility_creation/index.html', context)
 

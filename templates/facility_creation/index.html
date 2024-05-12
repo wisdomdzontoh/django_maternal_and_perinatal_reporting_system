@@ -9,6 +9,11 @@
   >
     <div>
       <a
+        class="bg-gray-500 inline-block px-4 py-2 text-sm text-white rounded"
+        href="{% url 'dashboard' %}"
+        >Go to Dashboard</a
+      >
+      <a
         class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
         href="{% url 'add_region' %}"
         >Create Org Unit</a
@@ -43,12 +48,12 @@
        
       </div>
     <div class="overflow-x-auto">
-      <table class="w-full bg-white shadow-md rounded-lg overflow-hidden text-center">
+      <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
         <thead class="bg-gray-200">
           <tr>
-            <th class="px-4 py-2">Region Name</th>
-            <th class="px-4 py-2">Districts</th>
-            <th class="px-4 py-2">Facilities</th>
+            <th class="px-4 py-2">Region Name ({{ total_regions }})</th>
+            <th class="px-4 py-2">Districts ({{ total_districts }})</th>
+            <th class="px-4 py-2">Facilities ({{ total_facilities }})</th>
             <th class="px-4 py-2">Date Region Created</th>
             <th class="px-4 py-2">Region Created by</th>
 
@@ -73,8 +78,12 @@
                 {% endfor %} {% endfor %}
               </ul>
             </td>
-            <td class="border px-4 py-2">{{ region.date_created }}</td>
-            <td class="border px-4 py-2">{{ region.created_by.first_name }} {{ region.created_by }}</td>
+            <td class="border px-4 py-2 text-center"><span
+              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+              >{{ region.date_created }}</span></td>
+            <td class="border px-4 py-2 text-center"><span
+              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
+              > {{ region.created_by }}</span></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -82,4 +91,5 @@
     </div>
   </div>
 </body>
+
 {% endblock %}

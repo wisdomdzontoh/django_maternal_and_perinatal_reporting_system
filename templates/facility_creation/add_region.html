@@ -15,7 +15,7 @@
         <a
           class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
           href="{% url 'view-all-facilities' %}"
-          >Delete Org unit</a
+          >Facilities</a
         >
         <a
           class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
@@ -99,7 +99,7 @@
           <label class="block text-gray-700 text-sm font-bold mb-2" for="district_region">Region Name</label>
           <select name="district_region" id="district_region" class="w-full bg-gray-100 rounded-md border border-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-500">
             {% for region in regions %}
-              <option value="{{ region.id }}">{{ region.region_name }}</option>
+            <option value="{{ region.id }}">{{ region.region_name }}</option>
             {% endfor %}
           </select>
         </div>
@@ -190,7 +190,7 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
 <script>
     $(document).ready(function() {
         // Function to fetch districts based on selected region
@@ -235,16 +235,17 @@
     dateFormat: "Y-m-d", // Set the date format
     // You can customize other options as needed
   });
-</script>
 
-<script>
-  $(document).ready(function () {
-    // Initialize select2 for district region selection
-    $("#district_region").select2();
+  $(document).ready(function() {
+    $('#district_region').select2({
+      placeholder: 'Select a region',
+      allowClear: true // Optional: Add a clear button
+    });
     $("#facility_region").select2();
     $("#facility_district").select2();
-
   });
 </script>
+
+
 {% endblock %}
 </body>

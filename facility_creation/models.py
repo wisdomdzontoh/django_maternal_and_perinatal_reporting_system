@@ -9,7 +9,7 @@ class Region(models.Model):
     created_by = models.CharField(max_length=100, null=True)
     
     def __str__(self):
-        return f"{self.region_name} ({self.region_code})"
+        return f"{self.region_name} region"
     
     
 class District(models.Model):
@@ -20,7 +20,7 @@ class District(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
-        return f"{self.district_name} ({self.district_code})"
+        return f"{self.district_name}"
     
 class Facility(models.Model):
     facility_region = models.ForeignKey(Region, on_delete=models.PROTECT)

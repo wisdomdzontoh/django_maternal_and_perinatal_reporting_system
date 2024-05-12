@@ -66,10 +66,13 @@ def dashboard(request):
 def dashboard(request):
     total_facilities = Facility.objects.count()
     total_districts = District.objects.count()
+    total_regions = Region.objects.count()
+    
     
     context = {
         "total_districts": total_districts,
         "total_facilities": total_facilities,
+        "total_regions": total_regions,
         
     }
     return render(request, 'authentication/dashboard.html', context)
