@@ -3,107 +3,116 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      /* Style for heading */
-      h1 {
-        font-family: Arial, sans-serif;
-        color: #333; /* Dark grey color */
-        text-align: center;
-        margin-bottom: 20px; /* Add some space below the heading */
-      }
-
-      /* Style for paragraphs */
-      p {
-        font-family: Arial, sans-serif;
-        color: #666; /* Medium grey color */
-        line-height: 1.5; /* Set line height for better readability */
-        margin-bottom: 15px; /* Add some space below paragraphs */
-      }
-
-      /* Style for list items */
-      li {
-        font-family: Arial, sans-serif;
-        color: #666; /* Medium grey color */
-      }
-
-      /* Style for image */
-      img {
-        display: block; /* Ensure the image is displayed as a block element */
-        margin: 0 auto; /* Center the image horizontally */
-        border-radius: 8px; /* Add a slight border radius for aesthetics */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-      }
-    </style>
-  </head>
-  <body>
-    <h1>JUSTIN'S ABOUT TRUMPET</h1>
-    <p>
-      The trumpet is a brass instrument that has been around for centuries. It
-      is known for its bright, clear sound that can range from mellow to
-      piercing, depending on the musician's skill and style. The trumpet is
-      often used in orchestras, jazz bands, and military ensembles, and it has
-      played a significant role in popular music throughout the years.
-    </p>
-
-    <p>
-      One of the most famous trumpet players in history is Louis Armstrong, who
-      was known for his incredible improvisation skills and his unique vocal
-      style. Armstrong was a key figure in the development of jazz music, and
-      his influence can still be felt in the genre today.
-    </p>
-
-    <p>
-      Another notable trumpet player is Miles Davis, who is often cited as one
-      of the most influential musicians of the 20th century. Davis was known for
-      his innovative style, which incorporated elements of jazz, rock, and
-      classical music. He was also a prolific composer, and his work has
-      inspired countless musicians over the years.
-    </p>
-
-    <p>
-      In addition to its role in music, the trumpet has also played a
-      significant role in military history. Trumpets were originally used in
-      battle to signal troops and communicate messages across the battlefield.
-      Today, military trumpet players continue to play an important role in
-      ceremonies and other events.
-    </p>
-
-    <p>
-      Overall, the trumpet is a versatile and important instrument that has
-      played a significant role in music and history. Whether you're a fan of
-      jazz, classical music, or popular music, there's no denying the power and
-      beauty of the trumpet.
-    </p>
-
-    <p>THE PARTS OF TRUMPET</p>
-    The trumpet consists of several parts.
-    <li>The main parts are the mouthpiece,</li>
-    <li>lead pipe,</li>
-    <li>valves,</li>
-    <li>tuning slide,</li>
-    <li>bell.</li>
-    <li>
-      The mouthpiece is where the musician blows into the instrument to create
-      sound.
-    </li>
-    <li>
-      The lead pipe connects the mouthpiece to the trumpet's valves, which are
-      used to change the pitch of the notes.
-    </li>
-    <li>The tuning slide is used to adjust the instrument's pitch, while</li>
-    <li>the bell is where the sound is amplified and projected outwards.</li>
-    <li>
-      Additionally, the trumpet has various other components, including valve
-      slides, water keys, and finger buttons, all of which play a role in
-      producing the instrument's sound.
-    </li>
-
-    <img
-      src="hal-gatewood-fTPSm7KD_d0-unsplash(1).jpg"
-      alt="justin trumpet"
-      width="500"
-      height="300"
+    <title>Maternal Entry Form</title>
+    <!-- Tailwind CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
     />
+  </head>
+
+  <body class="bg-gray-100 p-8">
+    <div class="max-w-xl mx-auto">
+      <h1 class="text-2xl font-bold mb-4">Maternal Entry Form</h1>
+
+      <!-- Personal Information -->
+      <div class="bg-white shadow-md rounded-md p-6 mb-6">
+        <h2 class="text-xl font-bold mb-4">Personal Information</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label
+              for="name_of_deceased"
+              class="block text-sm font-medium text-gray-700"
+              >Name of Deceased</label
+            >
+            <input
+              type="text"
+              id="name_of_deceased"
+              name="name_of_deceased"
+              class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+          <!-- Add other personal information fields here -->
+        </div>
+      </div>
+
+      <!-- Obstetric History -->
+      <div class="bg-white shadow-md rounded-md p-6 mb-6">
+        <h2 class="text-xl font-bold mb-4">Obstetric History</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label
+              for="gravidity"
+              class="block text-sm font-medium text-gray-700"
+              >Gravidity</label
+            >
+            <input
+              type="text"
+              id="gravidity"
+              name="gravidity"
+              class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+          <!-- Add other obstetric history fields here -->
+        </div>
+      </div>
+
+      <!-- Maternal Health Details -->
+      <div class="bg-white shadow-md rounded-md p-6 mb-6">
+        <h2 class="text-xl font-bold mb-4">Maternal Health Details</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label
+              for="hiv_status"
+              class="block text-sm font-medium text-gray-700"
+              >HIV Status</label
+            >
+            <select
+              id="hiv_status"
+              name="hiv_status"
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+            >
+              <option value="reactive">Reactive</option>
+              <option value="non-reactive">Non-Reactive</option>
+              <option value="dont know">Don't Know</option>
+            </select>
+          </div>
+          <!-- Add other maternal health details fields here -->
+        </div>
+      </div>
+
+      <!-- Mortality Details -->
+      <div class="bg-white shadow-md rounded-md p-6 mb-6">
+        <h2 class="text-xl font-bold mb-4">Mortality Details</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label
+              for="place_of_death"
+              class="block text-sm font-medium text-gray-700"
+              >Place of Death</label
+            >
+            <select
+              id="place_of_death"
+              name="place_of_death"
+              class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+            >
+              <option value="teaching hospital">Teaching Hospital</option>
+              <!-- Add other options for place of death -->
+            </select>
+          </div>
+          <!-- Add other mortality details fields here -->
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:bg-blue-600"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
   </body>
 </html>
