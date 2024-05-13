@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication',
     'facility_creation',
+    'maternal_entry',
+    
+    
     
     'tailwind', #tailwind library
     'theme',

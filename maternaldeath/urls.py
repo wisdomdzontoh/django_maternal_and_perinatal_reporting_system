@@ -9,6 +9,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('authentication.urls')),  # authentication urls for login and signup pages
     path('', include('facility_creation.urls')),  # facility_creation urls for login and signup pages
+    path('', include('maternal_entry.urls')),  # maternal_entry urls 
+    
     
     
     

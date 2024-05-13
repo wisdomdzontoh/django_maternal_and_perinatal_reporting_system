@@ -4,6 +4,7 @@ from .models import Region, District, Facility
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 
 
@@ -128,6 +129,7 @@ def get_districts(request):
 @login_required(login_url="authentication:my-login")
 def view_all_facility(request):
     facilities = Facility.objects.order_by('-facility_region').all()
+    
     return render(request, 'facility_creation/view_facilities.html', {'facilities': facilities})
 
 
