@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     
+    path('get_districts_and_facilities/', views.get_districts_and_facilities, name='get_districts_and_facilities'),
     path('maternal_entry/add_new', views.add_new, name="add_new"),  # Adjusted URL pattern
     path('maternal_entry', views.index, name="maternal_entry"),  # Adjusted URL pattern
     
