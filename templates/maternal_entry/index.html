@@ -1,0 +1,42 @@
+{% extends 'authentication/dashboard_base.html' %} {% block body %}
+
+    <!-- Health Informatics Module -->
+    <div class="container mx-auto mt-8 px-4">
+        <h2 class="text-2xl font-semibold mb-4">Dashboard Overview</h2>
+        <!-- Add ORG-UNIT Card -->
+    <div
+    class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+  >
+    <div>
+      <a
+        class="bg-gray-500 inline-block px-4 py-2 text-sm text-white rounded"
+        href="{% url 'dashboard' %}"
+        >Go to Dashboard</a
+      >
+      <a
+        class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
+        href="{% url 'add_new' %}"
+        >Add new entry</a
+      >
+      <a
+        class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
+        href="#"
+        >View entries</a
+      >
+      <a
+        class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
+        href="{{ request.META.HTTP_REFERER }}"
+        >Go back</a
+      >
+    </div>
+  </div>
+  </div>
+
+
+
+  <div class="container mx-auto py-8">
+    <h1 class="text-2xl font-bold mb-4">All Maternal Death Entries</h1>
+  </div>
+</body>
+
+{% endblock %}

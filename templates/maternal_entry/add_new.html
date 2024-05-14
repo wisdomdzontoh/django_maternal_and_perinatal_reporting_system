@@ -1,0 +1,302 @@
+{% extends 'authentication/dashboard_base.html' %} {% block body %}
+
+<section class="py-1 bg-blueGray-50">
+  <!-- Health Informatics Module -->
+  <div class="container mx-auto mt-8 px-4">
+    <h2 class="text-2xl font-semibold mb-4">Dashboard Overview</h2>
+    <!-- Add ORG-UNIT Card -->
+    <div
+      class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+    >
+      <div>
+        <a
+          class="bg-gray-500 inline-block px-4 py-2 text-sm text-white rounded"
+          href="{% url 'dashboard' %}"
+          >Go to Dashboard</a
+        >
+        <a
+          class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
+          href="#"
+          >Modify Entries</a
+        >
+        <a
+          class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
+          href="#"
+          >View entries</a
+        >
+        <a
+          class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
+          href="{{ request.META.HTTP_REFERER }}"
+          >Go back</a
+        >
+      </div>
+      <h1 class="text-2xl font-bold mb-4">Record New maternal death</h1>
+    </div>
+  </div>
+
+  <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
+    <div
+      class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+    >
+      <div class="rounded-t bg-white mb-0 px-6 py-6">
+        <div class="text-center flex justify-between">
+          <h6 class="text-blueGray-700 text-xl font-bold">
+            Maternal Deaths Entry Form
+          </h6>
+          <button
+            class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+            type="button"
+          >
+            Settings
+          </button>
+        </div>
+      </div>
+      <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+        <form>
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            Facility and Bio-Data
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xl font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Region
+                </label>
+                <select
+                  name="facility_region"
+                  id="facility_region"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  {% for region in regions %}
+                  <option value="{{ region.id }}">
+                    {{ region.region_name }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xl font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  District
+                </label>
+                <select
+                  name="facility_district"
+                  id="facility_district"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <!-- Options will be populated dynamically via AJAX -->
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xl font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Facility
+                </label>
+                <select
+                  name="facility_name"
+                  id="facility_name"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <!-- Options will be populated dynamically via AJAX -->
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Name of deceased
+                </label>
+                <input
+                  type="text"
+                  id="name_of_deceased"
+                  name="name_of_deceased"
+                  placeholder="name of deceased"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Date of birth unknown
+                </label>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="dob_unknown"
+                    name="dob_unknown"
+                    class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label
+                    for="dob_unknown"
+                    class="ml-2 block text-sm text-gray-900"
+                    >Yes</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            Contact Information
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Address
+                </label>
+                <input
+                  type="text"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  City
+                </label>
+                <input
+                  type="email"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="New York"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Country
+                </label>
+                <input
+                  type="text"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="United States"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Postal Code
+                </label>
+                <input
+                  type="text"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  value="Postal Code"
+                />
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            About Me
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  About me
+                </label>
+                <textarea
+                  type="text"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  rows="4"
+                >
+ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Open Source.</textarea
+                >
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer class="relative pt-8 pb-6 mt-2">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-wrap items-center md:justify-between justify-center"
+        >
+          <div class="w-full md:w-6/12 px-4 mx-auto text-center"></div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<script>
+  $(document).ready(function () {
+    // Function to fetch districts based on selected region
+    function fetchDistricts(regionId) {
+      $.ajax({
+        url: "{% url 'get_districts' %}", // URL to fetch districts
+        type: "GET",
+        data: {
+          region_id: regionId,
+        },
+        success: function (response) {
+          // Clear previous options
+          $("#facility_district").empty();
+
+          // Add new options for districts
+          $.each(response.districts, function (index, district) {
+            $("#facility_district").append(
+              $("<option>", {
+                value: district.id,
+                text: district.district_name,
+              })
+            );
+          });
+        },
+        error: function (xhr, errmsg, err) {
+          console.log("Error:", errmsg);
+          // Handle error if needed
+        },
+      });
+    }
+
+    // Event listener for region dropdown change
+    $("#facility_region").on("change", function () {
+      var selectedRegionId = $(this).val();
+      fetchDistricts(selectedRegionId);
+    });
+  });
+</script>
+{% endblock %}
