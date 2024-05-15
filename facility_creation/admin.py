@@ -15,4 +15,4 @@ class DistrictAdmin(admin.ModelAdmin):
 @admin.register(models.Facility)
 class FacilityAdmin(admin.ModelAdmin):
     list_display = ('facility_name', 'facility_region', 'facility_district', 'id', 'facility_code', 'date_created')
-    search_fields = ['facility_region__district_name', 'facility_name', 'facility_code', 'date_created']  # Added search fields for District
+    search_fields = ['facility_region__region_name', 'facility_name', 'facility_code', 'date_created']  # Added search fields for District
