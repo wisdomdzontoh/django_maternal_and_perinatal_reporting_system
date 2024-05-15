@@ -222,7 +222,7 @@ class MaternalEntry(models.Model):
     facility_district = models.ForeignKey(District, on_delete=models.PROTECT)
     facility_name = models.ForeignKey(Facility, on_delete=models.PROTECT)
     name_of_deceased = models.CharField(max_length=100)
-    dob_unknown = models.CharField(max_length=20, choices=DOB_UNKNOWN_CHOICES, default="no")
+    dob_unknown = models.BooleanField(default=False)
     date_of_birth = models.DateField()
     age = models.IntegerField()
     educational_status = models.CharField(max_length=100, choices=EDUCATION_CHOICES, default="none")

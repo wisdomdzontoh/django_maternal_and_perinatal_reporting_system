@@ -45,8 +45,33 @@
       rel="stylesheet"
       href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"
+      integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ="
+      crossorigin="anonymous"
+    ></script>
 
     <style>
+      .bg-black-alt {
+        background: #191919;
+      }
+      .text-black-alt {
+        color: #191919;
+      }
+      .border-black-alt {
+        border-color: #191919;
+      }
+
 
       /* Loader Styles */
    #loader-container {
@@ -124,10 +149,10 @@
   </head>
   <body class="bg-gray-100">
     <!-- Navbar -->
-    <nav class="bg-yellow-600 p-4">
+    <nav class="bg-blue-950 p-4">
       <div class="flex justify-between items-center">
         <a href="{% url 'dashboard' %}">
-        <h1 class="text-white text-xl font-bold">
+        <h1 class="text-white text-3xl font-extrabold">
             Maternal and Perinatal Death Reporting System
         </h1>
       </a>
@@ -152,14 +177,12 @@
             
        
   <!--profile icon-->
-  <div class="mt-0">
-    <input type="text" id="navSearch" class="w-full rounded-md py-2 px-4 bg-gray-800 text-gray-100" placeholder="Search...">
-</div>
+  
 
 <div class="flex items-center">
   <div class="profile relative mr-4">
     <img
-      src="{% static 'images/user.png' %}"
+      src="{% static 'images/man.png' %}"
       alt="Profile Image"
       class="rounded-full w-10 h-10 cursor-pointer"
     />
@@ -167,8 +190,7 @@
       <p class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">
         <i class="fas fa-user mr-2"></i>{{ user.username }}
       </p>
-      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">View Profile</a>
-      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">Update Profile</a>
+      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">Profile</a>
       <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-purple-600 hover:text-white">Reset Password</a>
       <a href="{% url 'user-logout' %}" 
       class="block px-4 py-2  hover:bg-purple-600 hover:text-white text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
@@ -179,8 +201,89 @@
   </div>
 </div>
 </div>
-    </nav>
+</nav>
     
+
+<div
+    class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-900 z-20"
+    id="nav-content"
+  >
+    <ul class="list-reset lg:flex flex-1 items-center px-4 md:px-0">
+      <li class="mr-6 my-2 md:my-0">
+        <a
+          href="{% url 'dashboard' %}"
+          class="block py-1 md:py-3 pl-1 align-middle text-blue-400 no-underline hover:text-gray-100 border-b-2 border-blue-400 hover:border-blue-400"
+        >
+          <i class="fas fa-home fa-fw mr-3 text-blue-400"></i
+          ><span class="pb-1 md:pb-0 text-sm">Dashboard</span>
+        </a>
+      </li>
+      <li class="mr-6 my-2 md:my-0">
+        <a
+          href="{% url 'facility_creation' %}"
+          class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900 hover:border-pink-400"
+        >
+          <i class="fas fa-tasks fa-fw mr-3"></i
+          ><span class="pb-1 md:pb-0 text-sm">Org Units</span>
+        </a>
+      </li>
+      <li class="mr-6 my-2 md:my-0">
+        <a
+          href="{% url 'maternal_entry' %}"
+          class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900 hover:border-pink-400"
+        >
+        <i class="fa fa-folder fa-fw mr-3"></i
+          ><span class="pb-1 md:pb-0 text-sm">Maternal Deaths</span>
+        </a>
+      </li>
+      <li class="mr-6 my-2 md:my-0">
+        <a
+          href="#"
+          class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900 hover:border-pink-400"
+        >
+        <i class="fa fa-baby fa-fw mr-3"></i
+          >
+          <span class="pb-1 md:pb-0 text-sm">Perinatal Deaths</span>
+        </a>
+      </li>
+      <li class="mr-6 my-2 md:my-0">
+        <a
+          href="#"
+          class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900 hover:border-purple-400"
+        >
+          <i class="fa fa-envelope fa-fw mr-3"></i
+          ><span class="pb-1 md:pb-0 text-sm">Messages</span>
+        </a>
+      </li>
+      <li class="mr-6 my-2 md:my-0">
+        <a
+          href="#"
+          class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900 hover:border-green-400"
+        >
+          <i class="fas fa-chart-area fa-fw mr-3"></i
+          ><span class="pb-1 md:pb-0 text-sm">Analytics</span>
+        </a>
+      </li>
+      <li class="mr-6 my-2 md:my-0">
+        <a
+          href="#"
+          class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-100 border-b-2 border-gray-900 hover:border-red-400"
+        >
+          <i class="fa fa-wallet fa-fw mr-3"></i
+          ><span class="pb-1 md:pb-0 text-sm">User Management</span>
+        </a>
+      </li>
+    </ul>
+    <div class="relative pull-right pl-4 pr-4 md:pr-0">
+      <input type="search" placeholder="Search" class="w-full bg-gray-900 text-sm text-gray-400 transition border border-gray-800 focus:outline-none focus:border-gray-600 rounded py-1 px-2 pl-10 appearance-none leading-normal">
+      <div class="absolute search-icon" style="top: 0.375rem;left: 1.75rem;">
+          <svg class="fill-current pointer-events-none text-gray-500 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+          </svg>
+      </div>
+  </div>
+  </div>
+  
   
 
     {% block body %}

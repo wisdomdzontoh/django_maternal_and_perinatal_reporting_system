@@ -64,6 +64,9 @@ def dashboard(request):
 
 @login_required(login_url="my-login")
 def dashboard(request):
+    regions = Region.objects.all()
+    districts = District.objects.all()
+    facilities = Facility.objects.all()
     total_facilities = Facility.objects.count()
     total_districts = District.objects.count()
     total_regions = Region.objects.count()
@@ -73,6 +76,9 @@ def dashboard(request):
         "total_districts": total_districts,
         "total_facilities": total_facilities,
         "total_regions": total_regions,
+        "regions": regions,
+        "districts": districts,
+        "facilities": facilities,
         
     }
     return render(request, 'authentication/dashboard.html', context)

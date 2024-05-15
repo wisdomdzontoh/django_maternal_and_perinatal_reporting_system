@@ -1,39 +1,35 @@
 {% extends 'authentication/dashboard_base.html' %} {% block body %}
 
-<section class="py-1 bg-blueGray-50">
-  <!-- Health Informatics Module -->
-  <div class="container mx-auto mt-8 px-4">
-    <h2 class="text-2xl font-semibold mb-4">Dashboard Overview</h2>
-    <!-- Add ORG-UNIT Card -->
-    <div
-      class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+<!-- Health Informatics Module -->
+<!-- Add ORG-UNIT Card -->
+<div
+  class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+>
+  <div>
+    <a
+      class="bg-gray-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{% url 'dashboard' %}"
+      >Go to Dashboard</a
     >
-      <div>
-        <a
-          class="bg-gray-500 inline-block px-4 py-2 text-sm text-white rounded"
-          href="{% url 'dashboard' %}"
-          >Go to Dashboard</a
-        >
-        <a
-          class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
-          href="#"
-          >Modify Entries</a
-        >
-        <a
-          class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
-          href="#"
-          >View entries</a
-        >
-        <a
-          class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
-          href="{{ request.META.HTTP_REFERER }}"
-          >Go back</a
-        >
-      </div>
-      <h1 class="text-2xl font-bold mb-4">Record New maternal death</h1>
-    </div>
+    <a
+      class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="#"
+      >Modify Entries</a
+    >
+    <a
+      class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="#"
+      >View entries</a
+    >
+    <a
+      class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{{ request.META.HTTP_REFERER }}"
+      >Go back</a
+    >
   </div>
+</div>
 
+<section class="py-1 bg-blueGray-50">
   <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
     <div
       class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
@@ -47,7 +43,7 @@
             class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
             type="button"
           >
-            Settings
+            Print Form
           </button>
         </div>
       </div>
@@ -80,25 +76,39 @@
             </div>
             <div class="w-full lg:w-6/12 px-4">
               <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-1xl font-bold mb-2" htmlfor="grid-password">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xl font-bold mb-2"
+                  htmlfor="grid-password"
+                >
                   District
                 </label>
-                <select name="facility_district" id="facility_district" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                <select
+                  name="facility_district"
+                  id="facility_district"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
                   <!-- Options will be populated dynamically via AJAX -->
                 </select>
               </div>
             </div>
             <div class="w-full lg:w-6/12 px-4">
               <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-1xl font-bold mb-2" htmlfor="grid-password">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xl font-bold mb-2"
+                  htmlfor="grid-password"
+                >
                   Facility
                 </label>
-                <select name="facility_name" id="facility_name" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                <select
+                  name="facility_name"
+                  id="facility_name"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
                   <!-- Options will be populated dynamically via AJAX -->
                 </select>
               </div>
             </div>
-            
+
             <div class="w-full lg:w-6/12 px-4">
               <div class="relative w-full mb-3">
                 <label
@@ -118,24 +128,72 @@
             </div>
             <div class="w-full lg:w-6/12 px-4">
               <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-1xs font-bold mb-2" for="dob_unknown">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  for="dob_unknown"
+                >
                   Date of birth unknown?
                 </label>
                 <div class="flex items-center">
-                  <input type="checkbox" id="dob_unknown" name="dob_unknown" class="h-8 w-8 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" onchange="toggleFields()">
-                  <label for="dob_unknown" class="ml-2 block text-sm text-gray-900">Yes</label>
+                  <input
+                    type="checkbox"
+                    id="dob_unknown"
+                    name="dob_unknown"
+                    class="h-8 w-8 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    onchange="toggleFields()"
+                  />
+                  <label
+                    for="dob_unknown"
+                    class="ml-2 block text-sm text-gray-900"
+                    >Yes</label
+                  >
                 </div>
               </div>
             </div>
-            
+
             <div class="w-full lg:w-6/12 px-4">
               <div class="relative w-full mb-3">
-                <label class="block uppercase text-blueGray-600 text-1xs font-bold mb-2" for="date_of_birth">Date of birth / (age) </label>
-                <input type="text" id="date_of_birth" name="date_of_birth" placeholder="select date" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
-                <input type="number" id="age" name="age" placeholder="enter age" style="display: none" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  for="date_of_birth"
+                  >Date of birth / (age)
+                </label>
+                <input
+                  type="text"
+                  id="date_of_birth"
+                  name="date_of_birth"
+                  placeholder="select date"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+                <input
+                  type="number"
+                  id="age"
+                  name="age"
+                  placeholder="enter age"
+                  style="display: none"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
               </div>
             </div>
 
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Educational Status
+                </label>
+                <input
+                  type="text"
+                  id="name_of_deceased"
+                  name="name_of_deceased"
+                  placeholder="name of deceased"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
           <hr class="mt-6 border-b-1 border-blueGray-300" />
 
           <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
@@ -257,7 +315,7 @@
         success: function (response) {
           // Clear previous options
           $("#facility_district, #facility_name").empty();
-  
+
           // Add new options for districts
           $.each(response.districts, function (index, district) {
             $("#facility_district").append(
@@ -267,7 +325,7 @@
               })
             );
           });
-  
+
           // Add new options for facilities
           $.each(response.facilities, function (index, facility) {
             $("#facility_name").append(
@@ -284,21 +342,24 @@
         },
       });
     }
-  
+
+    // Trigger change event on region dropdown after document is ready
+    $("#facility_region").trigger("change");
+
     // Event listener for region dropdown change
     $("#facility_region").on("change", function () {
       var selectedRegionId = $(this).val();
       var selectedDistrictId = $("#facility_district").val(); // Get selected district ID
       fetchData(selectedRegionId, selectedDistrictId);
     });
-  
+
     // Event listener for district dropdown change
     $("#facility_district").on("change", function () {
       var selectedRegionId = $("#facility_region").val(); // Get selected region ID
       var selectedDistrictId = $(this).val();
       fetchData(selectedRegionId, selectedDistrictId);
     });
-  });  
+  });
 </script>
 
 <script>
@@ -323,24 +384,23 @@
   });
 </script>
 
-
 <script>
   function toggleFields() {
-    var dobCheckbox = document.getElementById('dob_unknown');
-    var dateOfBirthField = document.getElementById('date_of_birth');
-    var ageField = document.getElementById('age');
-    var ageLabel = document.getElementById('ageLabel');
-    
+    var dobCheckbox = document.getElementById("dob_unknown");
+    var dateOfBirthField = document.getElementById("date_of_birth");
+    var ageField = document.getElementById("age");
+    var ageLabel = document.getElementById("ageLabel");
+
     if (dobCheckbox.checked) {
       // Hide date of birth field and show age field
-      dateOfBirthField.style.display = 'none';
-      ageField.style.display = 'block';
-      ageLabel.innerText = 'Age'; // Update label text
+      dateOfBirthField.style.display = "none";
+      ageField.style.display = "block";
+      ageLabel.innerText = "Age"; // Update label text
     } else {
       // Show date of birth field and hide age field
-      dateOfBirthField.style.display = 'block';
-      ageField.style.display = 'none';
-      ageLabel.innerText = 'Age'; // Update label text
+      dateOfBirthField.style.display = "block";
+      ageField.style.display = "none";
+      ageLabel.innerText = "Age"; // Update label text
     }
   }
 </script>
