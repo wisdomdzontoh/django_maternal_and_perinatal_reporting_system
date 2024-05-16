@@ -84,7 +84,7 @@ class MaternalEntry(models.Model):
     ]
     
     IDENTIFIED_RISK_CHOICES = [
-        ('none', 'none'),
+        ('none', 'None'),
         ('hypertension', 'Hypertension'),
         ('sickle cell disease', 'Sickle Cell Disease'),
         ('previous caesarean section', 'Previous Caesarean Section'),
@@ -95,7 +95,7 @@ class MaternalEntry(models.Model):
     ]
     
     TRANSPORT_TYPE_CHOICES = [
-        ('ambulance', 'Ambulance'),
+        ('ambulance', 'ambulance'),
         ('hospital vehicle', 'Hospital vehicle (not ambulance)'),
         ('public transport', 'Public Transport'),
         ('private transport', 'Private Transport'),

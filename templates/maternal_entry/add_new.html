@@ -872,6 +872,186 @@
                 />
               </div>
             </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Did patient deliver?
+                </label>
+                <select
+                  name="patient_deliver"
+                  id="patient_deliver"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">--select--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Days since termination (delivery/abortion/ectopic)
+                </label>
+                <input
+                  type="number"
+                  id="days_since_termination"
+                  name="days_since_termination"
+                  placeholder="(999=Died with pregnancy)"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Place of Death
+                </label>
+                <select
+                  name="patient_deliver"
+                  id="patient_deliver"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="teaching hospital">Teaching Hospital</option>
+                  <option value="regional hospital">Regional Hospital</option>
+                  <option value="health centre">District Hospital</option>
+                  <option value="polyclinic">Polyclinic</option>
+                  <option value="district hospital">Health Centre</option>
+                  <option value="clinic">Clinic</option>
+                  <option value="CHPS compound">CHPS Compound</option>
+                  <option value="private maternity home">
+                    Private Maternity Home
+                  </option>
+                  <option value="others (specify)">Others (Specify)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Other place of death (specify)
+                </label>
+                <input
+                  type="number"
+                  id="other_place_of_death"
+                  name="other_place_of_death"
+                  placeholder="specify"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Date of death
+                </label>
+                <input
+                  type="date"
+                  id="date_of_death"
+                  name="date_of_death"
+                  placeholder="selct date"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Time of death
+                </label>
+                <input
+                  type="time"
+                  id="time_of_death"
+                  name="time_of_death"
+                  placeholder="selct time"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            SECTION E: INTERVENTIONS (select multiple)
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Early Pregnancy
+                </label>
+                <select
+                  name="early_pregnancy"
+                  id="early_pregnancy"
+                  placeholder="select"
+                  multiple
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option selected value="">none</option>
+                  <option value="evacuation">Evacuation</option>
+                  <option value="antibiotic therapy">Antibiotic Therapy</option>
+                  <option value="laparotomy">Laparotomy</option>
+                  <option value="hysterectomy">Hysterectomy</option>
+                  <option value="transfusion">Transfusion</option>
+                  <option value="anti hypertensive">Anti Hypertensive</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Antenatal
+                </label>
+                <select
+                  name="antenatal"
+                  id="antenatal"
+                  placeholder="select"
+                  multiple
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option selected value="">none</option>
+                  <option value="transfusion">Transfusion</option>
+                  <option value="antibiotic therapy">External version</option>
+                  <option value="external version">Evacuation</option>
+                  <option value="mag sulphate">Mag. Sulphate</option>
+                  <option value="diazepam">Diazepam</option>
+                  <option value="hysterectomy">Hysterectomy</option>
+                  <option value="anti hypertensive">Anti Hypertensive</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -1049,6 +1229,12 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
     // You can customize other options as needed
   });
 
+  /*for date of death*/
+  flatpickr("#date_of_death", {
+    dateFormat: "Y-m-d", // Set the date format
+    // You can customize other options as needed
+  });
+
   /*time of arrival*/
   document.addEventListener("DOMContentLoaded", function () {
     flatpickr("#time_of_arrival", {
@@ -1063,6 +1249,17 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
   /*time treatment started*/
   document.addEventListener("DOMContentLoaded", function () {
     flatpickr("#time_of_arrival", {
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i",
+      time_24hr: true,
+      allowInput: true,
+    });
+  });
+
+  /*time of death */
+  document.addEventListener("DOMContentLoaded", function () {
+    flatpickr("#time_of_death", {
       enableTime: true,
       noCalendar: true,
       dateFormat: "H:i",
@@ -1234,6 +1431,8 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
   /*select2 for multiple select*/
   $(document).ready(function () {
     $("#identified_risk_factors").select2();
+    $("#early_pregnancy").select2();
+    $("#antenatal").select2();
   });
 </script>
 {% endblock %}
