@@ -238,7 +238,7 @@ class MaternalEntry(models.Model):
     anc = models.CharField(max_length=50, choices=MULTI_CHOICES, default="yes")
     total_anc_visits = models.IntegerField(default=0)
     place_of_anc = models.CharField(max_length=100, choices=PLACE_OF_ANC_CHOICES)
-    other_place_of_anc = models.CharField(max_length=100, default="none")
+    #other_place_of_anc = models.CharField(max_length=100, default="none")
     gestational_age = models.IntegerField(default="0")
     identified_risk_factors = models.TextField(choices=IDENTIFIED_RISK_CHOICES, null=True)        #Multiple select field
     other_risk_factors = models.CharField(max_length=100, default="none", null=True)

@@ -483,6 +483,135 @@
               </div>
             </div>
             <!--above is the closing div-->
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Identified ANC risk factor(s)
+                </label>
+                <select
+                  name="identified_risk_factors"
+                  id="identified_risk_factors"
+                  placeholder="select"
+                  multiple
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option selected value="none">None</option>
+                  <option value="hypertension">Hypertension</option>
+                  <option value="sickle cell disease">
+                    Sickle Cell Disease
+                  </option>
+                  <option value="previous caesarean section">
+                    Previous Caesarean Section
+                  </option>
+                  <option value="diabetes mellitus">
+                    Anaemia (HB < 11 g/dl; most current)
+                  </option>
+                  <option value="previous PPH">Previous PPH</option>
+                  <option value="others (specify)">Others (Specify)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  other Identified ANC risk factor(s)
+                </label>
+                <input
+                  type="text"
+                  id="other_risk_factors"
+                  name="other_risk_factors"
+                  placeholder="(specify)"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  HIV status
+                </label>
+                <select
+                  name="hiv_status"
+                  id="hiv_status"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">--select--</option>
+                  <option value="reactive">Reactive</option>
+                  <option value="non-reactive">Non-reactive</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Put on ARV
+                </label>
+                <select
+                  name="on_ARV"
+                  id="on_ARV"
+                  style="display: none"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">select</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Date of Arrival
+                </label>
+                <input
+                  type="date"
+                  id="date_of_arrival"
+                  name="date_of_arrival"
+                  placeholder="select date"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Time of Arrival
+                </label>
+                <input
+                  type="time"
+                  id="time_of_arrival"
+                  name="time_of_arrival"
+                  placeholder="select date"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+            <!--last div-->
           </div>
 
           <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -654,6 +783,23 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
     // You can customize other options as needed
   });
 
+  /*for date of arrival*/
+  flatpickr("#date_of_arrival", {
+    dateFormat: "Y-m-d", // Set the date format
+    // You can customize other options as needed
+  });
+
+  /*time of arrival*/
+  document.addEventListener("DOMContentLoaded", function () {
+    flatpickr("#time_of_arrival", {
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i",
+      time_24hr: true,
+      allowInput: true,
+    });
+  });
+
   $(document).ready(function () {
     $("#facility_region").select2({
       placeholder: "Select a region",
@@ -726,6 +872,25 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
     });
   });
 
+  /*for put on ARV*/
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the ethnicity dropdown and other ethnicity input field
+    const hivStatusDropdown = document.getElementById("hiv_status");
+    const onArvEthinicityInput = document.getElementById("on_ARV");
+
+    // Add event listener to the occupation dropdown
+    hivStatusDropdown.addEventListener("change", function () {
+      // Check if the selected value is "Other (Specify)"
+      if (hivStatusDropdown.value === "reactive") {
+        // Show the other occupation input field
+        onArvEthinicityInput.style.display = "block";
+      } else {
+        // Hide the other occupation input field
+        onArvEthinicityInput.style.display = "none";
+      }
+    });
+  });
+
   /*for ANC VISITS BY PREGNANT WOMAN*/
   document.addEventListener("DOMContentLoaded", function () {
     // Get the ethnicity dropdown and other ethnicity input field
@@ -751,6 +916,31 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
     });
   });
 
+  /*other risk factors*/
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the risk factors dropdown and other risk factors input field
+    const identifiedRiskFactorsDropdown = document.getElementById(
+      "identified_risk_factors"
+    );
+    const otherRiskFactorsInput = document.getElementById("other_risk_factors");
+
+    // Add event listener to the risk factors dropdown
+    identifiedRiskFactorsDropdown.addEventListener("change", function () {
+      // Check if "Others (Specify)" is selected
+      const selectedOptions = Array.from(
+        identifiedRiskFactorsDropdown.selectedOptions
+      ).map((option) => option.value);
+      if (selectedOptions.includes("others (specify)")) {
+        // Show the other risk factors input field
+        otherRiskFactorsInput.style.display = "block";
+      } else {
+        // Hide the other risk factors input field
+        otherRiskFactorsInput.style.display = "none";
+      }
+    });
+  });
+
+  /*dob*/
   function toggleFields() {
     var dobCheckbox = document.getElementById("dob_unknown");
     var dateOfBirthField = document.getElementById("date_of_birth");
@@ -769,5 +959,10 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
       ageLabel.innerText = "Age"; // Update label text
     }
   }
+
+  /*select2 for multiple select*/
+  $(document).ready(function () {
+    $("#identified_risk_factors").select2();
+  });
 </script>
 {% endblock %}
