@@ -576,42 +576,302 @@
               </div>
             </div>
 
-            <div class="w-full lg:w-6/12 px-4">
+            <div class="w-full lg:w-4/12 px-4">
               <div class="relative w-full mb-3">
                 <label
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlfor="grid-password"
                 >
-                  Date of Arrival
+                  Date of arrival
                 </label>
                 <input
                   type="date"
                   id="date_of_arrival"
                   name="date_of_arrival"
-                  placeholder="select date"
+                  placeholder="selct date"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 />
               </div>
             </div>
 
-            <div class="w-full lg:w-6/12 px-4">
+            <div class="w-full lg:w-4/12 px-4">
               <div class="relative w-full mb-3">
                 <label
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlfor="grid-password"
                 >
-                  Time of Arrival
+                  Time of arrival
                 </label>
                 <input
                   type="time"
                   id="time_of_arrival"
                   name="time_of_arrival"
-                  placeholder="select date"
+                  placeholder="selct time"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Time Treatment Started
+                </label>
+                <input
+                  type="time"
+                  id="time_of_arrival"
+                  name="time_of_arrival"
+                  placeholder="selct time"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              SECTION B: OBSTETRIC INFORMATION
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Referral from another health facility?
+                  </label>
+                  <select
+                    name="referral_from_another_facility"
+                    id="referral_from_another_facility"
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  >
+                    <option value="">--select--</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                    <option value="dont know">Dont Know</option>
+                  </select>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Referral from where?
+                  </label>
+                  <input
+                    type="text"
+                    id="referral_from_where"
+                    name="referral_from_where"
+                    placeholder="type city"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  />
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Time taken for client to reach facility
+                  </label>
+                  <input
+                    type="number"
+                    id="time_to_reach_facility"
+                    name="time_to_reach_facility"
+                    placeholder="How long (in minutes)"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  />
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Transport type did she arrive with?
+                  </label>
+                  <select
+                    name="transport_type"
+                    id="transport_type"
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  >
+                    <option value="ambulance">ambulance</option>
+                    <option value="hospital vehicle">hospital vehicle</option>
+                    <option value="public transport">Public Transport</option>
+                    <option value="private transport">Private Transport</option>
+                    <option value="others (specify)">Others (Specify)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Other transport specify
+                </label>
+                <input
+                  type="text"
+                  id="other_transport_type"
+                  name="other_transport_type"
+                  placeholder="other (specify)"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 />
               </div>
             </div>
             <!--last div-->
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            SECTION D: LABOUR & DELIVERY
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Did labour occur?
+                </label>
+                <select
+                  name="labour_occur"
+                  id="labour_occur"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">--select--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Was labour induced?
+                </label>
+                <select
+                  name="labour_induced"
+                  id="labour_induced"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">--select--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Was labour augmented?
+                </label>
+                <select
+                  name="labour_augmented"
+                  id="labour_augmented"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">--select--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Was partograph used?
+                </label>
+                <select
+                  name="photograph_used"
+                  id="photograph_used"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">--select--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Was partograph used?
+                </label>
+                <input
+                  type="number"
+                  id="active_phase"
+                  name="active_phase"
+                  placeholder="in minutes"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Second phase (Hours)
+                </label>
+                <input
+                  type="number"
+                  id="second_stage"
+                  name="second_stage"
+                  placeholder="in minutes"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Third Stage (mins)
+                </label>
+                <input
+                  type="number"
+                  id="third_stage"
+                  name="third_stage"
+                  placeholder="in minutes"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
           </div>
 
           <hr class="mt-6 border-b-1 border-blueGray-300" />
@@ -790,6 +1050,17 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
   });
 
   /*time of arrival*/
+  document.addEventListener("DOMContentLoaded", function () {
+    flatpickr("#time_of_arrival", {
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i",
+      time_24hr: true,
+      allowInput: true,
+    });
+  });
+
+  /*time treatment started*/
   document.addEventListener("DOMContentLoaded", function () {
     flatpickr("#time_of_arrival", {
       enableTime: true,
