@@ -128,7 +128,7 @@ def get_districts(request):
 #view facility
 @login_required(login_url="authentication:my-login")
 def view_all_facility(request):
-    facilities = Facility.objects.order_by('-facility_region').all()
+    facilities = Facility.objects.order_by('-facility_district').all()
     
     return render(request, 'facility_creation/view_facilities.html', {'facilities': facilities})
 

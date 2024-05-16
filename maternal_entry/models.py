@@ -34,7 +34,7 @@ class MaternalEntry(models.Model):
         ('trading', 'Trading'),
         ('artisan', 'Artisan(hairdresser, seamstress etc)'),
         ('civil/public servant', 'Civil/Public servant'),
-        ('other (specify)', 'Other (Specify)'),
+        ('others (specify)', 'Others (Specify)'),
     ]
     
     MARITAL_STATUS_CHOICES = [

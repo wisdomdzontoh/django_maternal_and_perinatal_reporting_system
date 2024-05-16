@@ -2,6 +2,7 @@
 
 <!-- Health Informatics Module -->
 <!-- Add ORG-UNIT Card -->
+
 <div
   class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
 >
@@ -29,7 +30,7 @@
   </div>
 </div>
 
-<section class="py-1 bg-blueGray-50">
+<section class="py-1 bg-gray-400">
   <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
     <div
       class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
@@ -184,16 +185,306 @@
                 >
                   Educational Status
                 </label>
+                <select
+                  name="educational_status"
+                  id="educational_status"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="none">None</option>
+                  <option value="primary">Primary</option>
+                  <option value="middle/JHS">Middle/JHS</option>
+                  <option value="secondary/SHS">Secondary/SHS</option>
+                  <option value="tertiary">Tertiary</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Occupation
+                </label>
+                <select
+                  name="occupation"
+                  id="occupation"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="unemployed">Unemployed</option>
+                  <option value="house wife">House wife</option>
+                  <option value="farming">Farming</option>
+                  <option value="trading">Trading</option>
+                  <option value="artisan">
+                    Artisan(hairdresser, seamstress etc)
+                  </option>
+                  <option value="other (specify)">Other (Specify)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Other occupation (Specify)
+                </label>
                 <input
                   type="text"
-                  id="name_of_deceased"
-                  name="name_of_deceased"
-                  placeholder="name of deceased"
+                  id="other_occupation"
+                  name="other_occupation"
+                  style="display: none"
+                  placeholder="specify other occupation"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Marital Status
+                </label>
+                <select
+                  name="marital_status"
+                  id="marital_status"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="never married">Never Married</option>
+                  <option value="married">Married</option>
+                  <option value="living together">Living Together</option>
+                  <option value="divorced/separated">Divorced/Separated</option>
+                  <option value="widowed">Widowed</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Religion
+                </label>
+                <select
+                  name="religion"
+                  id="religion"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="christian">Christian</option>
+                  <option value="muslim">Muslim</option>
+                  <option value="traditionalist/ spiritualist">
+                    Traditionalist/ Spiritualist
+                  </option>
+                  <option value="others (specify)">Others (Specify)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Other Religion (Specify)
+                </label>
+                <input
+                  type="text"
+                  id="other_religion"
+                  name="other_religion"
+                  style="display: none"
+                  placeholder="specify other religion"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <!--ethnicity-->
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Ethnicity
+                </label>
+                <select
+                  name="ethnicity"
+                  id="ethnicity"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="akan">Akan</option>
+                  <option value="ga/dangbe">Ga/Dangbe</option>
+                  <option value="ewe">Ewe</option>
+                  <option value="mole/dagbani">Mole/Dagbani</option>
+                  <option value="grussi">Grussi</option>
+                  <option value="gruma">Gruma</option>
+                  <option value="others (specify)">Others (Specify)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Other Ethnicity (Specify)
+                </label>
+                <input
+                  type="text"
+                  id="other_ethnicity"
+                  name="other_ethnicity"
+                  style="display: none"
+                  placeholder="specify other ethnicity"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 />
               </div>
             </div>
           </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            SECTION B: OBSTETRIC INFORMATION
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Gravidity
+                </label>
+                <input
+                  type="text"
+                  id="gravidity"
+                  name="gravidity"
+                  placeholder="enter gravidity"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Parity (include current delivery)
+                </label>
+                <input
+                  type="text"
+                  id="parity"
+                  name="parity"
+                  placeholder="enter parity"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  ANC during this pregnancy?
+                </label>
+                <select
+                  name="anc"
+                  id="anc"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">--select--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="dont know">Dont Know</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3"></div>
+              <!--empty field div-->
+            </div>
+            <!--starts from here-->
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Total No. of ANC Visits
+                </label>
+                <input
+                  type="number"
+                  id="total_anc_visits"
+                  name="total_anc_visits"
+                  style="display: none"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Place of ANC
+                </label>
+                <select
+                  name="place_of_anc"
+                  id="place_of_anc"
+                  style="display: none"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="teaching hospital">Teaching Hospital</option>
+                  <option value="regional hospital">Regional Hospital</option>
+                  <option value="health centre">District Hospital</option>
+                  <option value="polyclinic">Polyclinic</option>
+                  <option value="district hospital">Health Centre</option>
+                  <option value="clinic">Clinic</option>
+                  <option value="CHPS compound">CHPS Compound</option>
+                  <option value="private maternity home">
+                    Private Maternity Home
+                  </option>
+                  <option value="others (specify)">Others (Specify)</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Gestational Age at booking
+                </label>
+                <input
+                  type="number"
+                  id="gestational_age"
+                  name="gestational_age"
+                  placeholder="(in weeks)"
+                  style="display: none"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+            <!--above is the closing div-->
+          </div>
+
           <hr class="mt-6 border-b-1 border-blueGray-300" />
 
           <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
@@ -211,7 +502,6 @@
                 <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                 />
               </div>
             </div>
@@ -226,7 +516,6 @@
                 <input
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  value="New York"
                 />
               </div>
             </div>
@@ -241,7 +530,6 @@
                 <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  value="United States"
                 />
               </div>
             </div>
@@ -256,7 +544,6 @@
                 <input
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  value="Postal Code"
                 />
               </div>
             </div>
@@ -281,7 +568,7 @@
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   rows="4"
                 >
- A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Open Source.</textarea
+A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Open Source.</textarea
                 >
               </div>
             </div>
@@ -360,9 +647,8 @@
       fetchData(selectedRegionId, selectedDistrictId);
     });
   });
-</script>
 
-<script>
+  /*for selection age and date of birth*/
   flatpickr("#date_of_birth", {
     dateFormat: "Y-m-d", // Set the date format
     // You can customize other options as needed
@@ -382,9 +668,89 @@
       allowClear: true, // Optional: Add a clear button
     });
   });
-</script>
 
-<script>
+  /*for other occupation*/
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the occupation dropdown and other occupation input field
+    const occupationDropdown = document.getElementById("occupation");
+    const otherOccupationInput = document.getElementById("other_occupation");
+
+    // Add event listener to the occupation dropdown
+    occupationDropdown.addEventListener("change", function () {
+      // Check if the selected value is "Other (Specify)"
+      if (occupationDropdown.value === "other (specify)") {
+        // Show the other occupation input field
+        otherOccupationInput.style.display = "block";
+      } else {
+        // Hide the other occupation input field
+        otherOccupationInput.style.display = "none";
+      }
+    });
+  });
+
+  /*for other Religion*/
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the religion dropdown and other religion input field
+    const religionDropdown = document.getElementById("religion");
+    const otherReligionInput = document.getElementById("other_religion");
+
+    // Add event listener to the occupation dropdown
+    religionDropdown.addEventListener("change", function () {
+      // Check if the selected value is "Other (Specify)"
+      if (religionDropdown.value === "others (specify)") {
+        // Show the other occupation input field
+        otherReligionInput.style.display = "block";
+      } else {
+        // Hide the other occupation input field
+        otherReligionInput.style.display = "none";
+      }
+    });
+  });
+
+  /*for other Ethnicity*/
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the ethnicity dropdown and other ethnicity input field
+    const ethnicityDropdown = document.getElementById("ethnicity");
+    const otherEthinicityInput = document.getElementById("other_ethnicity");
+
+    // Add event listener to the occupation dropdown
+    ethnicityDropdown.addEventListener("change", function () {
+      // Check if the selected value is "Other (Specify)"
+      if (ethnicityDropdown.value === "others (specify)") {
+        // Show the other occupation input field
+        otherEthinicityInput.style.display = "block";
+      } else {
+        // Hide the other occupation input field
+        otherEthinicityInput.style.display = "none";
+      }
+    });
+  });
+
+  /*for ANC VISITS BY PREGNANT WOMAN*/
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the ethnicity dropdown and other ethnicity input field
+    const ancDropdown = document.getElementById("anc");
+    const totalAncVisitsInput = document.getElementById("total_anc_visits");
+    const placeOfAncInput = document.getElementById("place_of_anc");
+    const gestationalAgeInput = document.getElementById("gestational_age");
+
+    // Add event listener to the occupation dropdown
+    ancDropdown.addEventListener("change", function () {
+      // Check if the selected value is "Other (Specify)"
+      if (ancDropdown.value === "yes") {
+        // Show the other occupation input field
+        totalAncVisitsInput.style.display = "block";
+        placeOfAncInput.style.display = "block";
+        gestationalAgeInput.style.display = "block";
+      } else {
+        // Hide the other occupation input field
+        totalAncVisitsInput.style.display = "none";
+        placeOfAncInput.style.display = "none";
+        gestationalAgeInput.style.display = "none";
+      }
+    });
+  });
+
   function toggleFields() {
     var dobCheckbox = document.getElementById("dob_unknown");
     var dateOfBirthField = document.getElementById("date_of_birth");
