@@ -60,7 +60,7 @@
                   text: '{{ message }}',
                   confirmButtonText: 'OK'
               }).then(function () {
-                  window.location.href = '{% url 'add_region' %}';
+                  window.location.href = '{% url 'add_new' %}';
               });
           });
         </script>
@@ -180,7 +180,7 @@
                   >Date of birth / (age)
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   id="date_of_birth"
                   name="date_of_birth"
                   placeholder="select date"
@@ -845,7 +845,7 @@
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlfor="grid-password"
                 >
-                  Was partograph used?
+                  Active phase
                 </label>
                 <input
                   type="number"
@@ -1716,6 +1716,7 @@
                   id="forms_entered_by"
                   name="forms_entered_by"
                   placeholder="full name"
+                  readonly
                   value="{{ user.first_name }} {{ user.last_name }}"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 />
