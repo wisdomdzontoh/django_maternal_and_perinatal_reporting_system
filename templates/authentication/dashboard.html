@@ -1,204 +1,135 @@
 {% extends 'authentication/dashboard_base.html' %} {% block body %}
 
-<body class="bg-black-alt font-sans leading-normal tracking-normal">
-  <div class="container w-full mx-auto pt-20">
-    <div class="w-full px-4 md:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
-      <div class="flex flex-wrap">
-        <div class="w-full md:w-1/2 xl:w-1/3 p-3">
-          <!--Metric Card-->
-          <div class="bg-gray-900 border border-gray-800 rounded shadow p-2">
-            <div class="flex flex-row items-center">
-              <div class="flex-shrink pr-4">
-                <div class="rounded p-3 bg-blue-600">
-                  <i class="fa-solid fa-house-medical fa-2x fa-inverse"></i>
-                </div>
+ <!-- Main content -->
+ <div class="flex-1 p-6 md:p-10">
+  <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <!-- Metric Card -->
+      <div class="bg-white shadow rounded-lg p-5">
+          <div class="flex items-center">
+              <div class="p-3 rounded-full bg-blue-600 text-white">
+                  <i class="fas fa-hospital fa-2x"></i>
               </div>
-              <div class="flex-1 text-right md:text-center">
-                <h5 class="font-bold uppercase text-gray-400">
-                  Total Facilities
-                </h5>
-                <h3 class="font-bold text-3xl text-gray-300">
-                  {{ total_facilities }}
-                </h3>
+              <div class="ml-4">
+                  <h5 class="text-gray-600 uppercase font-bold">Total Facilities</h5>
+                  <h3 class="text-gray-900 text-3xl">{{ total_facilities }}</h3>
               </div>
-            </div>
           </div>
-          <!--/Metric Card-->
-        </div>
-        <div class="w-full md:w-1/2 xl:w-1/3 p-3">
-          <!--Metric Card-->
-          <div class="bg-gray-900 border border-gray-800 rounded shadow p-2">
-            <div class="flex flex-row items-center">
-              <div class="flex-shrink pr-4">
-                <div class="rounded p-3 bg-red-600">
-                  <i
-                    class="fa-solid fa-person-pregnant fa-fw fa-2x fa-inverse"
-                  ></i>
-                </div>
-              </div>
-              <div class="flex-1 text-right md:text-center">
-                <h5 class="font-bold uppercase text-gray-400">
-                  Total Maternal Deaths
-                </h5>
-                <h3 class="font-bold text-3xl text-gray-300">15</h3>
-              </div>
-            </div>
-          </div>
-          <!--/Metric Card-->
-        </div>
-        <div class="w-full md:w-1/2 xl:w-1/3 p-3">
-          <!--Metric Card-->
-          <div class="bg-gray-900 border border-gray-800 rounded shadow p-2">
-            <div class="flex flex-row items-center">
-              <div class="flex-shrink pr-4">
-                <div class="rounded p-3 bg-yellow-600">
-                  <i class="fas fa-baby fa-2x fa-fw fa-inverse"></i>
-                </div>
-              </div>
-              <div class="flex-1 text-right md:text-center">
-                <h5 class="font-bold uppercase text-gray-400">
-                  Total Perinatal Deaths
-                </h5>
-                <h3 class="font-bold text-3xl text-gray-300">20</h3>
-              </div>
-            </div>
-          </div>
-          <!--/Metric Card-->
-        </div>
       </div>
-
-      <!--Divider-->
-      <hr class="border-b-2 border-gray-600 my-8 mx-4" />
-
-      <div class="flex flex-row flex-wrap flex-grow mt-2">
-        <div class="w-full md:w-1/2 p-3">
-          <!--Graph Card-->
-          <div class="bg-gray-900 border border-gray-800 rounded shadow">
-            <div class="border-b border-gray-800 p-3">
-              <h5 class="font-bold uppercase text-gray-600">
-                Maternal Deaths Trend
-              </h5>
-            </div>
-            <div class="p-5">
-              <canvas
-                id="maternalDeathsChart"
-                class="chartjs"
-                width="undefined"
-                height="undefined"
-              ></canvas>
-              <script>
-                new Chart(document.getElementById("maternalDeathsChart"), {
+      <!-- Metric Card -->
+      <div class="bg-white shadow rounded-lg p-5">
+          <div class="flex items-center">
+              <div class="p-3 rounded-full bg-red-600 text-white">
+                  <i class="fas fa-user-injured fa-2x"></i>
+              </div>
+              <div class="ml-4">
+                  <h5 class="text-gray-600 uppercase font-bold">Total Maternal Deaths</h5>
+                  <h3 class="text-gray-900 text-3xl">15</h3>
+              </div>
+          </div>
+      </div>
+      <!-- Metric Card -->
+      <div class="bg-white shadow rounded-lg p-5">
+          <div class="flex items-center">
+              <div class="p-3 rounded-full bg-yellow-600 text-white">
+                  <i class="fas fa-baby fa-2x"></i>
+              </div>
+              <div class="ml-4">
+                  <h5 class="text-gray-600 uppercase font-bold">Total Perinatal Deaths</h5>
+                  <h3 class="text-gray-900 text-3xl">20</h3>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+      <!-- Graph Card -->
+      <div class="bg-white shadow rounded-lg p-5">
+          <div class="border-b border-gray-200 mb-4 pb-2">
+              <h5 class="text-gray-600 uppercase font-bold">Maternal Deaths Trend</h5>
+          </div>
+          <canvas id="maternalDeathsChart"></canvas>
+          <script>
+              new Chart(document.getElementById("maternalDeathsChart"), {
                   type: "line",
                   data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                    datasets: [
-                      {
-                        label: "Maternal Deaths",
-                        data: [5, 4, 6, 3, 7, 5, 8],
-                        fill: false,
-                        borderColor: "rgb(255, 99, 132)",
-                        lineTension: 0.1,
-                      },
-                    ],
-                  },
-                  options: {},
-                });
-              </script>
-            </div>
+                      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                      datasets: [{
+                          label: "Maternal Deaths",
+                          data: [5, 4, 6, 3, 7, 5, 8],
+                          borderColor: "rgb(255, 99, 132)",
+                          fill: false,
+                          lineTension: 0.1,
+                      }]
+                  }
+              });
+          </script>
+      </div>
+      <!-- Graph Card -->
+      <div class="bg-white shadow rounded-lg p-5">
+          <div class="border-b border-gray-200 mb-4 pb-2">
+              <h5 class="text-gray-600 uppercase font-bold">Perinatal Deaths Trend</h5>
           </div>
-          <!--/Graph Card-->
-        </div>
-
-        <div class="w-full md:w-1/2 p-3">
-          <!--Graph Card-->
-          <div class="bg-gray-900 border border-gray-800 rounded shadow">
-            <div class="border-b border-gray-800 p-3">
-              <h5 class="font-bold uppercase text-gray-600">
-                Perinatal Deaths Trend
-              </h5>
-            </div>
-            <div class="p-5">
-              <canvas
-                id="perinatalDeathsChart"
-                class="chartjs"
-                width="undefined"
-                height="undefined"
-              ></canvas>
-              <script>
-                new Chart(document.getElementById("perinatalDeathsChart"), {
+          <canvas id="perinatalDeathsChart"></canvas>
+          <script>
+              new Chart(document.getElementById("perinatalDeathsChart"), {
                   type: "line",
                   data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                    datasets: [
-                      {
-                        label: "Perinatal Deaths",
-                        data: [3, 5, 4, 7, 6, 8, 5],
-                        fill: false,
-                        borderColor: "rgb(54, 162, 235)",
-                        lineTension: 0.1,
-                      },
-                    ],
-                  },
-                  options: {},
-                });
-              </script>
-            </div>
-          </div>
-          <!--/Graph Card-->
-        </div>
+                      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                      datasets: [{
+                          label: "Perinatal Deaths",
+                          data: [3, 5, 4, 7, 6, 8, 5],
+                          borderColor: "rgb(54, 162, 235)",
+                          fill: false,
+                          lineTension: 0.1,
+                      }]
+                  }
+              });
+          </script>
       </div>
-      <!--/ Console Content-->
-    </div>
   </div>
-  <div class="w-full p-3">
-    <!--Table Card-->
-    <div class="bg-gray-900 border border-gray-800 rounded shadow">
-      <div class="border-b border-gray-800 p-3">
-        <h5 class="font-bold uppercase text-gray-600">Table</h5>
+  <div class="bg-white shadow rounded-lg p-5 mt-6">
+      <div class="border-b border-gray-200 mb-4 pb-2">
+          <h5 class="text-gray-600 uppercase font-bold">Table</h5>
       </div>
-      <div class="p-5">
-        <table class="w-full p-5 text-gray-700">
-          <thead>
-            <tr>
-              <th class="text-left text-gray-600">Region</th>
-              <th class="text-left text-gray-600">District</th>
-              <th class="text-left text-gray-600">Facility</th>
-              <th class="text-left text-gray-600">Maternal Deaths</th>
-              <th class="text-left text-gray-600">Perinatal deaths</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>Greater Accra</td>
-              <td>Korley Klottey</td>
-              <td>Rigde Hospital</td>
-              <td>12</td>
-              <td>Jedi</td>
-            </tr>
-            <tr>
-              <td>Greedo</td>
-              <td>South</td>
-              <td>Scumbag</td>
-              <td>Scumbag</td>
-              <td>Scumbag</td>
-            </tr>
-            <tr>
-              <td>Darth Vader</td>
-              <td>Dark</td>
-              <td>Sith</td>
-              <td>Sith</td>
-              <td>Sith</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p class="py-2">
-          <a href="#" class="text-white">See More issues...</a>
-        </p>
+      <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+              <thead>
+                  <tr>
+                      <th class="py-2 px-3 text-gray-600 text-left">Region</th>
+                      <th class="py-2 px-3 text-gray-600 text-left">District</th>
+                      <th class="py-2 px-3 text-gray-600 text-left">Facility</th>
+                      <th class="py-2 px-3 text-gray-600 text-left">Maternal Deaths</th>
+                      <th class="py-2 px-3 text-gray-600 text-left">Perinatal Deaths</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td class="py-2 px-3">Greater Accra</td>
+                      <td class="py-2 px-3">Korley Klottey</td>
+                      <td class="py-2 px-3">Ridge Hospital</td>
+                      <td class="py-2 px-3">12</td>
+                      <td class="py-2 px-3">10</td>
+                  </tr>
+                  <tr>
+                      <td class="py-2 px-3">Greedo</td>
+                      <td class="py-2 px-3">South</td>
+                      <td class="py-2 px-3">Scumbag</td>
+                      <td class="py-2 px-3">10</td>
+                      <td class="py-2 px-3">15</td>
+                  </tr>
+                  <tr>
+                      <td class="py-2 px-3">Darth Vader</td>
+                      <td class="py-2 px-3">Dark</td>
+                      <td class="py-2 px-3">Sith</td>
+                      <td class="py-2 px-3">20</td>
+                      <td class="py-2 px-3">25</td>
+                  </tr>
+              </tbody>
+          </table>
       </div>
-    </div>
-    <!--/table Card-->
+      <p class="py-2 mt-4">
+          <a href="#" class="text-blue-500 hover:underline">See More issues...</a>
+      </p>
   </div>
+</div>
   {{ redirect_to_login_immediately }} {% endblock %}
 </body>

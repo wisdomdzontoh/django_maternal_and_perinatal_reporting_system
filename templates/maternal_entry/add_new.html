@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<section class="py-1 bg-gray-400">
+<section class="py-1 bg-gray-200">
   <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
     <div
       class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
@@ -48,8 +48,28 @@
           </button>
         </div>
       </div>
+      {% if messages %}
+      <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Success!',
+                  text: '{{ message }}',
+                  confirmButtonText: 'OK'
+              }).then(function () {
+                  window.location.href = '{% url 'add_region' %}';
+              });
+          });
+        </script>
+        {% endfor %}
+      </div>
+      {% else %}
       <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-        <form>
+        <form method="POST">
+          {% csrf_token %}
           <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
             Facility and Bio-Data
           </h6>
@@ -1043,21 +1063,503 @@
                 >
                   <option selected value="">none</option>
                   <option value="transfusion">Transfusion</option>
-                  <option value="antibiotic therapy">External version</option>
-                  <option value="external version">Evacuation</option>
+                  <option value="antibiotic therapy">Antibiotic Therapy</option>
+                  <option value="external version">External version</option>
                   <option value="mag sulphate">Mag. Sulphate</option>
                   <option value="diazepam">Diazepam</option>
-                  <option value="hysterectomy">Hysterectomy</option>
                   <option value="anti hypertensive">Anti Hypertensive</option>
+                  <option value="hysterectomy">Hysterectomy</option>
                 </select>
               </div>
             </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Intrapartum
+                </label>
+                <select
+                  name="intrapartum"
+                  id="intrapartum"
+                  placeholder="select"
+                  multiple
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option selected value="">none</option>
+                  <option value="instrumental del">Instrumental del.</option>
+                  <option value="antibiotic therapy">Antibiotic Therapy</option>
+                  <option value="caesarian section">Caesarian section</option>
+                  <option value="hysterectomy">Hysterectomy</option>
+                  <option value="transfusion">Transfusion</option>
+                  <option value="mag sulphate">Mag. Sulphate</option>
+                  <option value="anti hypertensive">Anti Hypertensive</option>
+                  <option value="diazepam">Diazepam</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Postpartum
+                </label>
+                <select
+                  name="postpartum"
+                  id="postpartum"
+                  placeholder="select"
+                  multiple
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option selected value="">none</option>
+                  <option value="evacuation">Evacuation</option>
+                  <option value="antibiotic therapy">Antibiotic Therapy</option>
+                  <option value="laparotomy">Laparotomy</option>
+                  <option value="hysterectomy">Hysterectomy</option>
+                  <option value="transfusion">Transfusion</option>
+                  <option value="manual removal of placenta">
+                    Manual removal of placenta
+                  </option>
+                  <option value="anti hypertensive">Anti Hypertensive</option>
+                  <option value="diazepam">Diazepam</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Others
+                </label>
+                <select
+                  name="other_options"
+                  id="other_options"
+                  placeholder="select"
+                  multiple
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option selected value="">none</option>
+                  <option value="anaesthesia-GA">Anaesthesia-GA</option>
+                  <option value="epidural">Epidural</option>
+                  <option value="spinal">Spinal</option>
+                  <option value="local">Local</option>
+                  <option value="invasive monitoring">
+                    Invasive monitoring
+                  </option>
+                  <option value="anti hypertensive">Anti Hypertensive</option>
+                  <option value="ICU ventilation">ICU ventilation</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Other interventions not listed
+                </label>
+                <input
+                  type="text"
+                  id="other_interventions"
+                  name="other_interventions"
+                  placeholder="state here"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
           </div>
 
           <hr class="mt-6 border-b-1 border-blueGray-300" />
 
           <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-            Contact Information
+            SECTION:H CONTRIBUTORY FACTORS
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Was Autopsy performed
+                </label>
+                <select
+                  name="autopsy_performed"
+                  id="autopsy_performed"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Date Autopsy Performed
+                </label>
+                <input
+                  type="date"
+                  id="date_autopsy_performed"
+                  name="date_autopsy_performed"
+                  placeholder="selct date"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Place Autopsy Performed
+                </label>
+                <input
+                  type="text"
+                  id="place_autopsy_performed"
+                  name="place_autopsy_performed"
+                  placeholder="facility name"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Autopsy Performed by
+                </label>
+                <select
+                  name="labour_occur"
+                  id="labour_occur"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="pathologist">Pathologist</option>
+                  <option value="medical officer">Medical Officer</option>
+                  <option value="others (specify)">Others (Specify)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Specify autopsy performed by
+                </label>
+                <input
+                  type="text"
+                  id="other_autopsy_performed_by"
+                  name="other_autopsy_performed_by"
+                  placeholder="other (specify)"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            CAUSE OF DEATH
+          </h6>
+          <div class="w-full lg:w-12/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlfor="grid-password"
+              >
+                Final Cause of Death
+              </label>
+              <textarea
+                type="text"
+                id="final_COD"
+                name="final_COD"
+                placeholder="state final cause of death"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                rows="4"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-4/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlfor="grid-password"
+              >
+                Primary (Underlying) Obstetric Cause of Death
+              </label>
+              <select
+                name="primary_obstetric_COD"
+                id="primary_obstetric_COD"
+                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+              >
+                <option value="haemorrhage">Haemorrhage</option>
+                <option value="unsafe abortion">Unsafe abortion</option>
+                <option value="ruptured uterus">Ruptured Uterus</option>
+                <option value="malaria">Malaria</option>
+                <option value="hypertensive disease">
+                  hypertensive disease
+                </option>
+                <option value="genital tract sepsis">
+                  Genital Tract Sepsis
+                </option>
+                <option value="ectopic pregnancy">Ectopic Pregnancy</option>
+                <option value="sickle cell disease">Sickle Cell disease</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="w-full lg:w-4/12 px-4">
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlfor="grid-password"
+              >
+                Other (eg anaesthesia):
+              </label>
+              <input
+                type="text"
+                id="other_primary_obstetric_COD"
+                name="other_primary_obstetric_COD"
+                placeholder="other (specify)"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+              />
+            </div>
+          </div>
+
+          <!--contributory factors-->
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            SECTION H: CONTRIBUTORY FACTORS
+          </h6>
+          <p class="text-red-400 text-sm mt-3 mb-6 font-bold uppercase">
+            IN YOUR OPINION DID ANY OF THE FOLLOWING FACTORS CONTRIBUTE TO THE
+            DEATH OF THIS PATIENT
+          </p>
+          <h5>Personal/Family /Community Factors</h5>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Delay in woman seeking help
+                </label>
+                <select
+                  name="delay_in_seeking_help"
+                  id="delay_in_seeking_help"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="don't know">Don't Know</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Specify
+                </label>
+                <input
+                  type="text"
+                  name="specify_delay_in_seeking_help"
+                  id="specify_delay_in_seeking_help"
+                  placeholder="do not leave blank"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Declined treatment or admission
+                </label>
+                <select
+                  name="declined_treatment_admission"
+                  id="declined_treatment_admission"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="don't know">Don't Know</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Specify
+                </label>
+                <input
+                  type="text"
+                  name="specify_declined_treatment_admission"
+                  id="specify_declined_treatment_admission"
+                  placeholder="do not leave blank"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
+
+          <h5>Transport and Communication Systems</h5>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Lack of Transport from home to reach facility
+                </label>
+                <select
+                  name="lack_of_transport_from_home_to_facility"
+                  id="lack_of_transport_from_home_to_facility"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="don't know">Don't Know</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Specify
+                </label>
+                <input
+                  type="text"
+                  name="specify_lack_of_transport_from_home_to_facility"
+                  id="specify_lack_of_transport_from_home_to_facility"
+                  placeholder="do not leave blank"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Lack of Transport between Health Care Facilities
+                </label>
+                <select
+                  name="lack_of_transport_between_facility"
+                  id="lack_of_transport_between_facility"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="don't know">Don't Know</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Specify
+                </label>
+                <input
+                  type="text"
+                  name="specify_lack_of_transport_between_facility"
+                  id="specify_lack_of_transport_between_facility"
+                  placeholder="do not leave blank"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Health Service to Health Service Communication breakdown
+                </label>
+                <select
+                  name="hf_communication_breakdown"
+                  id="hf_communication_breakdown"
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="don't know">Don't Know</option>
+                </select>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Specify
+                </label>
+                <input
+                  type="text"
+                  name="specify_hf_communication_breakdown"
+                  id="specify_hf_communication_breakdown"
+                  placeholder="do not leave blank"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            Key notes to take from this case
           </h6>
           <div class="flex flex-wrap">
             <div class="w-full lg:w-12/12 px-4">
@@ -1066,107 +1568,212 @@
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlfor="grid-password"
                 >
-                  Address
-                </label>
-                <input
-                  type="text"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                />
-              </div>
-            </div>
-            <div class="w-full lg:w-4/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlfor="grid-password"
-                >
-                  City
-                </label>
-                <input
-                  type="email"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                />
-              </div>
-            </div>
-            <div class="w-full lg:w-4/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlfor="grid-password"
-                >
-                  Country
-                </label>
-                <input
-                  type="text"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                />
-              </div>
-            </div>
-            <div class="w-full lg:w-4/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlfor="grid-password"
-                >
-                  Postal Code
-                </label>
-                <input
-                  type="text"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                />
-              </div>
-            </div>
-          </div>
-
-          <hr class="mt-6 border-b-1 border-blueGray-300" />
-
-          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-            About Me
-          </h6>
-          <div class="flex flex-wrap">
-            <div class="w-full lg:w-12/12 px-4">
-              <div class="relative w-full mb-3">
-                <label
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlfor="grid-password"
-                >
-                  About me
+                  Summary of potential avoidable factors, missed opportunities
+                  and substandard care
                 </label>
                 <textarea
                   type="text"
+                  name="potential_avoidable_factors"
+                  id="potential_avoidable_factors"
+                  placeholder="(Please note that substandard care includes inadequate monitoring as well as substandard monitoring)"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   rows="4"
+                ></textarea>
+              </div>
+            </div>
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
                 >
-A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Open Source.</textarea
+                  What has your facility learnt from this case and what changes
+                  have been instituted?
+                </label>
+                <textarea
+                  type="text"
+                  name="lessons_learnt"
+                  id="lessons_learnt"
+                  placeholder="lessons to learnt"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
                 >
+                  Recommendations and Further Actions to be Taken
+                </label>
+                <textarea
+                  type="text"
+                  name="recommendations"
+                  id="recommendations"
+                  placeholder="recommendations"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            Contact Information of Reporters
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Names of team members
+                </label>
+                <textarea
+                  type="text"
+                  name="names_of_team_members"
+                  id="names_of_team_members"
+                  placeholder="separate with comma(,)"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Committe Chairman Name
+                </label>
+                <input
+                  type="email"
+                  name="committee_chairman_name"
+                  id="committee_chairman_name"
+                  placeholder="eg. Will Smith"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Committe chairman phone number
+                </label>
+                <input
+                  type="text"
+                  name="committee_chairman_phone"
+                  id="committee_chairman_phone"
+                  placeholder="eg. 0245626632"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Committe chirman Rank
+                </label>
+                <input
+                  type="text"
+                  name="committee_chairman_rank"
+                  id="committee_chairman_rank"
+                  placeholder="med. Supretendent"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+          </div>
+
+          <hr class="mt-6 border-b-1 border-blueGray-300" />
+
+          <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+            Data entry personnel
+          </h6>
+          <div class="flex flex-wrap">
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Data entered by
+                </label>
+                <input
+                  type="text"
+                  id="forms_entered_by"
+                  name="forms_entered_by"
+                  placeholder="full name"
+                  value="{{ user.first_name }} {{ user.last_name }}"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                />
+              </div>
+            </div>
+            <div class="w-full lg:w-6/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  for="isAudited"
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Is death Audited
+                </label>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="isAudited"
+                    name="isAudited"
+                    class="h-8 w-8 text-green-600 focus:ring-blue-500 border-gray-300 rounded"
+                  />
+                  <label
+                    for="isAudited"
+                    class="ml-2 block text-sm text-gray-900"
+                    >Yes</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <button
+                  class="bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Submit entry
+                </button>
               </div>
             </div>
           </div>
         </form>
+        {% endif %}
       </div>
     </div>
-    <footer class="relative pt-8 pb-6 mt-2">
-      <div class="container mx-auto px-4">
-        <div
-          class="flex flex-wrap items-center md:justify-between justify-center"
-        >
-          <div class="w-full md:w-6/12 px-4 mx-auto text-center"></div>
-        </div>
-      </div>
-    </footer>
   </div>
 </section>
 
 <script>
   $(document).ready(function () {
     // Function to fetch districts and facilities based on selected region and district
-    function fetchData(regionId, districtId) {
+    function fetchData(regionId, districtId, districtName) {
       $.ajax({
         url: "{% url 'get_districts_and_facilities' %}", // URL to fetch districts and facilities
         type: "GET",
         data: {
           region_id: regionId,
           district_id: districtId,
+          district_: districtName,
         },
         success: function (response) {
           // Clear previous options
@@ -1231,6 +1838,12 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
 
   /*for date of death*/
   flatpickr("#date_of_death", {
+    dateFormat: "Y-m-d", // Set the date format
+    // You can customize other options as needed
+  });
+
+  /*for date autopsy perfomed*/
+  flatpickr("#date_autopsy_performed", {
     dateFormat: "Y-m-d", // Set the date format
     // You can customize other options as needed
   });
@@ -1433,6 +2046,9 @@ A beautiful UI Kit and Admin for JavaScript &amp; Tailwind CSS. It is Freeand Op
     $("#identified_risk_factors").select2();
     $("#early_pregnancy").select2();
     $("#antenatal").select2();
+    $("#intrapartum").select2();
+    $("#postpartum").select2();
+    $("#other_options").select2();
   });
 </script>
 {% endblock %}

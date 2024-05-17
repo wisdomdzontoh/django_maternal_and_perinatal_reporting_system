@@ -203,7 +203,7 @@ class MaternalEntry(models.Model):
     PRIMARY_OBSTETRIC_COD_CHOICES = [
         ('haemorrhage', 'Haemorrhage'),                
         ('unsafe abortion', 'Unsafe abortion'),                
-        ('ruptured uterus ', 'Ruptured Uterus '),                
+        ('ruptured uterus', 'Ruptured Uterus'),                
         ('obstructed labour', 'Obstructed Labour'),                
         ('malaria', 'Malaria'),                
         ('hypertensive disease', 'hypertensive disease'),                
@@ -277,7 +277,7 @@ class MaternalEntry(models.Model):
     intrapartum = models.TextField(choices=INTRAPARTUM_CHOICES, null=True)              #Multiple select field
     postpartum = models.TextField(choices=POSTPARTUM_CHOICES, null=True)              #Multiple select field
     other_options = models.TextField(choices=OTHER_OPTIONS, null=True)
-    other_interventions = models.TextField(default="none", null=True)
+    other_interventions = models.CharField(max_length=100, default="none", null=True)
     #SECTION:G, MORTALITY DETAILS
     autopsy_performed = models.CharField(max_length=50, choices=MULTI_CHOICES)
     date_autopsy_performed = models.DateField()
@@ -288,14 +288,19 @@ class MaternalEntry(models.Model):
     primary_obstetric_COD = models.TextField(choices=PRIMARY_OBSTETRIC_COD_CHOICES, null=True)    #Multiple select field
     other_primary_obstetric_COD = models.TextField(null=True)    #Multiple select field
     #SECTION:H CONTRIBUTORY FACTORS
-    delay_in_seeking_help = models.CharField(max_length=50, choices=MULTI_CHOICES, null=True)
+    delay_in_seeking_help = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
     specify_delay_in_seeking_help = models.CharField(max_length=250, null=True)
-    lack_of_transport_from_home = models.CharField(max_length=50, choices=MULTI_CHOICES, null=True)
+    lack_of_transport_from_home = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
     specify_lack_of_transport_from_home = models.CharField(max_length=250, null=True)
-    lack_of_transport_between_facility = models.CharField(max_length=50, choices=MULTI_CHOICES, null=True)
+    declined_treatment_admission = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
+    specify_declined_treatment_admission = models.CharField(max_length=250, null=True)
+    lack_of_transport_from_home_to_facility = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
+    specify_lack_of_transport_from_home_to_facility = models.CharField(max_length=250, null=True)
+    lack_of_transport_between_facility = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
     specify_lack_of_transport_between_facility = models.CharField(max_length=250, null=True)
-    hf_communication_breakdown = models.CharField(max_length=50, choices=MULTI_CHOICES, null=True)     #hf - health facility
+    hf_communication_breakdown = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)     #hf - health facility
     specify_hf_communication_breakdown = models.CharField(max_length=250, null=True)                    #hf - health facility
+    potential_avoidable_factors = models.TextField()        #Summary of potential avoidable factors, missed opportunities and substandard care
     lessons_learnt = models.TextField()         #What has your facility learnt from this case and what changes have been instituted?
     recommendations = models.TextField()        #Recommendations and Further Actions to be Taken
     isAudited = models.CharField(max_length=100, choices=AUDITED_CHOICES, default="yes")
