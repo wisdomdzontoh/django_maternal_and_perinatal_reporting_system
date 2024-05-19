@@ -34,25 +34,22 @@
           <h2 class="text-2xl font-bold mb-4">
             <i class="fas fa-calendar-plus text-blue-500"></i> Edit Facility
           </h2>
-          {% if messages %}
+          
           <div class="alert alert-success" role="alert">
-            {% for message in messages %}
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script>
-              document.addEventListener('DOMContentLoaded', function () {
-                  Swal.fire({
-                      icon: 'success',
-                      title: 'Success!',
-                      text: '{{ message }}',
-                      confirmButtonText: 'OK'
-                  }).then(function () {
-                      window.location.href = '{% url 'view-all-facilities' %}';
-                  });
-              });
-            </script>
-            {% endfor %}
-          </div>
-          {% else %}
+        {% for message in messages %}
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <script>
+          Toastify({
+            text: "{{ message }}",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "green",
+            stopOnFocus: true,
+          }).showToast();
+        </script>
+        {% endfor %}
+      </div>
           <form class="shadow-md bg-white rounded-2xl p-4" method="POST">
             {% csrf_token %}
             <div class="mb-4">
@@ -91,7 +88,6 @@
               <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Update Facility</button>
             </div>
           </form>
-          {% endif %}
         </div>
       </div>
       
@@ -137,7 +133,6 @@
         });
     });
 </script>
-
 
 
 <script>

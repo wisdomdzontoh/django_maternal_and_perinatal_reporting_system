@@ -55,6 +55,8 @@ def filter_deaths(request):
 
 
 
+
+#add new entry
 @login_required(login_url="authentication:my-login")
 def add_new(request):
     regions = Region.objects.all()
@@ -70,7 +72,9 @@ def add_new(request):
         facility_name_id = request.POST.get("facility_name")
         name_of_deceased = request.POST.get("name_of_deceased")
         dob_unknown = request.POST.get("dob_unknown") == 'on'
-        date_of_birth = request.POST.get("date_of_birth")
+        date_of_birth = request.POST.get('date_of_birth', None)
+        if date_of_birth == '':
+            date_of_birth = None
         age = request.POST.get('age', None)
         if age == '':
             age = None  # Convert empty string to None

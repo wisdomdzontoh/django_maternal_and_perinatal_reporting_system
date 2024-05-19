@@ -54,25 +54,22 @@
   </div>
 
 
-{% if messages %}
 <div class="alert alert-success" role="alert">
   {% for message in messages %}
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '{{ message }}',
-            confirmButtonText: 'OK'
-        }).then(function () {
-            window.location.href = '{% url 'view-all-facilities' %}';
-        });
-    });
-  </script>
-  {% endfor %}
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <script>
+          Toastify({
+            text: "{{ message }}",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "green",
+            stopOnFocus: true,
+          }).showToast();
+        </script>
+        {% endfor %}
 </div>
-{% else %}
+
 
 <div class="container mx-auto mt-8">
   <table
@@ -170,5 +167,4 @@
     </tbody>
   </table>
 </div>
-
-{% endif %} {% endblock %}
+ {% endblock %}
