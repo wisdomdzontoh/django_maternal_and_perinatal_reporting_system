@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 
 
 
+#view all on index page
 @login_required(login_url="authentication:my-login")
 def index(request):
     query = request.GET.get('q')
@@ -37,7 +38,7 @@ def index(request):
 
 
 
-
+#facility creation
 @login_required(login_url="authentication:my-login")
 def add_region(request):
     regions = Region.objects.all()
@@ -116,6 +117,8 @@ def add_region(request):
     return render(request, 'facility_creation/add_region.html', context)
 
 
+
+#org unit cascade
 @login_required(login_url="authentication:my-login")
 def get_districts(request):
     if request.method == 'GET' and 'region_id' in request.GET:
@@ -124,6 +127,8 @@ def get_districts(request):
         return JsonResponse({'districts': list(districts)})
     else:
         return JsonResponse({'error': 'Invalid request'})    
+
+
 
 #view facility
 @login_required(login_url="authentication:my-login")
@@ -170,8 +175,6 @@ def edit_facility(request, id):
         facility.save()  # Save the changes
         messages.success(request, 'Facility updated successfully.')
           # Redirect to the same page after successful submission
-
-   
     return render(request, 'facility_creation/edit_facility.html', context)
 
 

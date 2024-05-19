@@ -13,6 +13,48 @@ def index(request):
     return render(request, 'maternal_entry/index.html')
 
 
+
+#view all entries
+@login_required(login_url="authentication:my-login")
+def view_all(request):
+    maternal_deaths = MaternalEntry.objects.order_by('-facility_district_id').all()
+    
+    context = {
+        'maternal_deaths': maternal_deaths,
+    }
+    return render(request, 'maternal_entry/view_all.html', context)
+
+
+
+#filter deaths
+@login_required(login_url="authentication:my-login")
+def filter_deaths(request):
+    # Get query parameters
+    facility_district = request.GET.get('facility_district')
+    facility_name = request.GET.get('facility_name')
+    name_of_deceased = request.GET.get('name_of_deceased')
+    is_audited = request.GET.get('isAudited')
+
+    # Filter the queryset based on query parameters
+    maternal_deaths = MaternalEntry.objects.all()
+
+    if facility_district:
+        maternal_deaths = maternal_deaths.filter(facility_district__district_name__icontains=facility_district)
+    if facility_name:
+        maternal_deaths = maternal_deaths.filter(facility_name__facility_name__icontains=facility_name)
+    if name_of_deceased:
+        maternal_deaths = maternal_deaths.filter(name_of_deceased__icontains=name_of_deceased)
+    if is_audited in ['True', 'False']:
+        maternal_deaths = maternal_deaths.filter(isAudited=(is_audited == 'True'))
+
+    context = {
+        'maternal_deaths': maternal_deaths,
+    }
+ # Render the template with the filtered facilities
+    return render(request, 'maternal_entry/view_all.html', context)
+
+
+
 @login_required(login_url="authentication:my-login")
 def add_new(request):
     regions = Region.objects.all()
@@ -214,7 +256,6 @@ def add_new(request):
 
 
 
-from django.http import JsonResponse
 
 @login_required(login_url="authentication:my-login")
 def get_districts_and_facilities(request):

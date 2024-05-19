@@ -1,0 +1,177 @@
+{% extends 'authentication/dashboard_base.html' %} {% block body %}
+
+<div
+  class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+>
+  <div>
+    <a
+      class="bg-gray-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{% url 'dashboard' %}"
+      >Go to Dashboard</a
+    >
+    <a
+      class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="#"
+      >Modify Entries</a
+    >
+    <a
+      class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{% url 'view_all' %}"
+      >View entries</a
+    >
+    <a
+      class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{{ request.META.HTTP_REFERER }}"
+      >Go back</a
+    >
+  </div>
+  <div class="flex justify-center mb-4">
+    <form method="GET" action="{% url 'filter-deaths' %}" class="flex gap-4">
+      <input type="text" name="facility_district" placeholder="District name" class="p-2 rounded-md border-gray-300" />
+      <input type="text" name="facility_name" placeholder="Facility Name" class="p-2 rounded-md border-gray-300" />
+      <input type="text" name="name_of_deceased" placeholder="Name of Deceased" class="p-2 rounded-md border-gray-300" />
+      <select name="isAudited" class="p-2 rounded-md border-gray-300">
+        <option value="">none</option>
+        <option value="True">Audited</option>
+        <option value="False">Unaudited</option>
+      </select>
+      <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Filter</button>
+    </form>
+  </div>
+</div>
+</div>
+
+
+
+
+{% if messages %}
+<div class="alert alert-success" role="alert">
+{% for message in messages %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: '{{ message }}',
+          confirmButtonText: 'OK'
+      }).then(function () {
+          window.location.href = '{% url 'view-all-facilities' %}';
+      });
+  });
+</script>
+{% endfor %}
+</div>
+{% else %}
+
+<div class="container mx-auto mt-8">
+<table
+  class="min-w-full divide-y divide-gray-200 rounded-md shadow overflow-hidden w-full"
+>
+  <!-- Table Header -->
+  <thead>
+    <tr>
+      <th
+        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+      >
+        Region
+      </th>
+      <th
+        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+      >
+        District
+      </th>
+      <th
+        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+      >
+        Facility
+      </th>
+      <th
+        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+      >
+        Name of Deceased
+      </th>
+      <th
+        class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+      >
+        Status
+      </th>
+      <th
+      class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+    >
+      Last updated
+    </th>
+      <th
+        class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-extrabold bg-gray-50"
+      >
+        Action
+      </th>
+    </tr>
+  </thead>
+  <!-- Table Body -->
+  <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
+    <!-- Table Rows (Rendered by Django) -->
+    {% if maternal_deaths %} {% for maternal_death in maternal_deaths %}
+    <tr>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        <a
+          href="#"
+          class="text-blue-900 hover:text-blue-900 mr-2"
+          >{{ maternal_death.facility_region.region_name }}</a
+        >
+      </td>
+
+      <td class="px-6 py-4 whitespace-no-wrap">
+        <a
+          href="#"
+          class="text-blue-900 hover:text-blue-900 mr-2"
+        >
+          {{ maternal_death.facility_district.district_name  }}
+        </a>
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        <a
+          href="{#"
+          class="text-blue-900 hover:text-blue-900 mr-2"
+        >
+        {{ maternal_death.facility_name.facility_name }}
+      </td></a>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        <a
+          href="{#"
+          class="text-blue-900 hover:text-blue-900 mr-2"
+        >
+        {{ maternal_death.name_of_deceased }}
+      </td></a>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        {% if maternal_death.isAudited == 'True' %}
+        <span
+              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+              >Audited</span
+            >
+        {% else %}
+        <span
+              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"
+              >Unaudited</span
+            >
+        {% endif %}
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        {{ maternal_death.last_updated }}
+      </td>
+      <td
+        class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium"
+      >
+        <i class="fa-solid fa-eye fa-2x"></i>
+      </td>
+    </tr>
+    {% endfor %} {% else %}
+    <tr>
+      <td colspan="7" class="py-8 px-2 text-center">No facilities found</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+</div>
+
+{% endif %}{% endblock %}
