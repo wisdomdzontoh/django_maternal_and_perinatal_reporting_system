@@ -1,135 +1,265 @@
 {% extends 'authentication/dashboard_base.html' %} {% block body %}
 
- <!-- Main content -->
- <div class="flex-1 p-6 md:p-10">
-  <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-      <!-- Metric Card -->
-      <div class="bg-white shadow rounded-lg p-5">
-          <div class="flex items-center">
-              <div class="p-3 rounded-full bg-blue-600 text-white">
-                  <i class="fas fa-hospital fa-2x"></i>
-              </div>
-              <div class="ml-4">
-                  <h5 class="text-gray-600 uppercase font-bold">Total Facilities</h5>
-                  <h3 class="text-gray-900 text-3xl">{{ total_facilities }}</h3>
-              </div>
-          </div>
-      </div>
-      <!-- Metric Card -->
-      <div class="bg-white shadow rounded-lg p-5">
-          <div class="flex items-center">
-              <div class="p-3 rounded-full bg-red-600 text-white">
-                  <i class="fas fa-user-injured fa-2x"></i>
-              </div>
-              <div class="ml-4">
-                  <h5 class="text-gray-600 uppercase font-bold">Total Maternal Deaths</h5>
-                  <h3 class="text-gray-900 text-3xl">15</h3>
-              </div>
-          </div>
-      </div>
-      <!-- Metric Card -->
-      <div class="bg-white shadow rounded-lg p-5">
-          <div class="flex items-center">
-              <div class="p-3 rounded-full bg-yellow-600 text-white">
-                  <i class="fas fa-baby fa-2x"></i>
-              </div>
-              <div class="ml-4">
-                  <h5 class="text-gray-600 uppercase font-bold">Total Perinatal Deaths</h5>
-                  <h3 class="text-gray-900 text-3xl">20</h3>
-              </div>
-          </div>
-      </div>
+<!-- Sidebar -->
+<div class="flex flex-no-wrap">
+  
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-      <!-- Graph Card -->
-      <div class="bg-white shadow rounded-lg p-5">
-          <div class="border-b border-gray-200 mb-4 pb-2">
-              <h5 class="text-gray-600 uppercase font-bold">Maternal Deaths Trend</h5>
-          </div>
-          <canvas id="maternalDeathsChart"></canvas>
-          <script>
-              new Chart(document.getElementById("maternalDeathsChart"), {
-                  type: "line",
-                  data: {
-                      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                      datasets: [{
-                          label: "Maternal Deaths",
-                          data: [5, 4, 6, 3, 7, 5, 8],
-                          borderColor: "rgb(255, 99, 132)",
-                          fill: false,
-                          lineTension: 0.1,
-                      }]
-                  }
-              });
-          </script>
-      </div>
-      <!-- Graph Card -->
-      <div class="bg-white shadow rounded-lg p-5">
-          <div class="border-b border-gray-200 mb-4 pb-2">
-              <h5 class="text-gray-600 uppercase font-bold">Perinatal Deaths Trend</h5>
-          </div>
-          <canvas id="perinatalDeathsChart"></canvas>
-          <script>
-              new Chart(document.getElementById("perinatalDeathsChart"), {
-                  type: "line",
-                  data: {
-                      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                      datasets: [{
-                          label: "Perinatal Deaths",
-                          data: [3, 5, 4, 7, 6, 8, 5],
-                          borderColor: "rgb(54, 162, 235)",
-                          fill: false,
-                          lineTension: 0.1,
-                      }]
-                  }
-              });
-          </script>
-      </div>
-  </div>
-  <div class="bg-white shadow rounded-lg p-5 mt-6">
-      <div class="border-b border-gray-200 mb-4 pb-2">
-          <h5 class="text-gray-600 uppercase font-bold">Table</h5>
-      </div>
-      <div class="overflow-x-auto">
-          <table class="min-w-full bg-white">
-              <thead>
-                  <tr>
-                      <th class="py-2 px-3 text-gray-600 text-left">Region</th>
-                      <th class="py-2 px-3 text-gray-600 text-left">District</th>
-                      <th class="py-2 px-3 text-gray-600 text-left">Facility</th>
-                      <th class="py-2 px-3 text-gray-600 text-left">Maternal Deaths</th>
-                      <th class="py-2 px-3 text-gray-600 text-left">Perinatal Deaths</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td class="py-2 px-3">Greater Accra</td>
-                      <td class="py-2 px-3">Korley Klottey</td>
-                      <td class="py-2 px-3">Ridge Hospital</td>
-                      <td class="py-2 px-3">12</td>
-                      <td class="py-2 px-3">10</td>
-                  </tr>
-                  <tr>
-                      <td class="py-2 px-3">Greedo</td>
-                      <td class="py-2 px-3">South</td>
-                      <td class="py-2 px-3">Scumbag</td>
-                      <td class="py-2 px-3">10</td>
-                      <td class="py-2 px-3">15</td>
-                  </tr>
-                  <tr>
-                      <td class="py-2 px-3">Darth Vader</td>
-                      <td class="py-2 px-3">Dark</td>
-                      <td class="py-2 px-3">Sith</td>
-                      <td class="py-2 px-3">20</td>
-                      <td class="py-2 px-3">25</td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-      <p class="py-2 mt-4">
-          <a href="#" class="text-blue-500 hover:underline">See More issues...</a>
+
+  <!-- Main Content -->
+  <main class="flex-grow p-6">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h1 class="text-2xl font-bold mb-4">
+        Welcome to the Maternal and Perinatal Death Reporting System
+      </h1>
+      <p class="mb-4">
+        This dashboard provides comprehensive insights into maternal and
+        perinatal deaths. Use the links in the sidebar to navigate through
+        various sections.
       </p>
-  </div>
+
+      <!-- Charts Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+        <!-- Metric Card -->
+      <div class="bg-white shadow rounded-lg p-5">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-blue-600 text-white">
+                <i class="fas fa-hospital fa-2x"></i>
+            </div>
+            <div class="ml-4">
+                <h5 class="text-gray-600 uppercase font-bold">Total Facilities</h5>
+                <h3 class="text-gray-900 text-3xl">{{ total_facilities }}</h3>
+            </div>
+        </div>
+    </div>
+    <!-- Metric Card -->
+    <div class="bg-white shadow rounded-lg p-5">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-red-600 text-white">
+                <i class="fas fa-user-injured fa-2x"></i>
+            </div>
+            <div class="ml-4">
+                <h5 class="text-gray-600 uppercase font-bold">Total Maternal Deaths</h5>
+                <h3 class="text-gray-900 text-3xl">15</h3>
+            </div>
+        </div>
+    </div>
+    <!-- Metric Card -->
+    <div class="bg-white shadow rounded-lg p-5">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-yellow-600 text-white">
+                <i class="fas fa-baby fa-2x"></i>
+            </div>
+            <div class="ml-4">
+                <h5 class="text-gray-600 uppercase font-bold">Total Perinatal Deaths</h5>
+                <h3 class="text-gray-900 text-3xl">20</h3>
+            </div>
+        </div>
+    </div>
+        <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
+          <canvas id="chart1"></canvas>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
+          <canvas id="chart2"></canvas>
+        </div>
+        <div class="bg-gray-100 p-4 rounded-lg shadow-lg">
+          <canvas id="chart3"></canvas>
+        </div>
+        
+        <!-- Graph Card -->
+      <div class="bg-white shadow rounded-lg p-5">
+        <div class="border-b border-gray-200 mb-4 pb-2">
+            <h5 class="text-gray-600 uppercase font-bold">Perinatal Deaths Trend</h5>
+        </div>
+        <canvas id="perinatalDeathsChart"></canvas>
+        <script>
+            new Chart(document.getElementById("perinatalDeathsChart"), {
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                    datasets: [{
+                        label: "Perinatal Deaths",
+                        data: [3, 5, 4, 7, 6, 8, 5],
+                        borderColor: "rgb(54, 162, 235)",
+                        fill: false,
+                        lineTension: 0.1,
+                    }]
+                }
+            });
+        </script>
+    </div>
+
+    <!-- Graph Card -->
+    <div class="bg-white shadow rounded-lg p-5">
+        <div class="border-b border-gray-200 mb-4 pb-2">
+            <h5 class="text-gray-600 uppercase font-bold">Maternal Deaths Trend</h5>
+        </div>
+        <canvas id="maternalDeathsChart"></canvas>
+        <script>
+            new Chart(document.getElementById("maternalDeathsChart"), {
+                type: "line",
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                    datasets: [{
+                        label: "Maternal Deaths",
+                        data: [5, 4, 6, 3, 7, 5, 8],
+                        borderColor: "rgb(255, 99, 132)",
+                        fill: false,
+                        lineTension: 0.1,
+                    }]
+                }
+            });
+        </script>
+    </div>
+
+
+    <div class="bg-white shadow rounded-lg p-5 mt-6">
+        <div class="border-b border-gray-200 mb-4 pb-2">
+            <h5 class="text-gray-600 uppercase font-bold">Table</h5>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-3 text-gray-600 text-left">Region</th>
+                        <th class="py-2 px-3 text-gray-600 text-left">District</th>
+                        <th class="py-2 px-3 text-gray-600 text-left">Facility</th>
+                        <th class="py-2 px-3 text-gray-600 text-left">Maternal Deaths</th>
+                        <th class="py-2 px-3 text-gray-600 text-left">Perinatal Deaths</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="py-2 px-3">Greater Accra</td>
+                        <td class="py-2 px-3">Korley Klottey</td>
+                        <td class="py-2 px-3">Ridge Hospital</td>
+                        <td class="py-2 px-3">12</td>
+                        <td class="py-2 px-3">10</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-3">Greedo</td>
+                        <td class="py-2 px-3">South</td>
+                        <td class="py-2 px-3">Scumbag</td>
+                        <td class="py-2 px-3">10</td>
+                        <td class="py-2 px-3">15</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-3">Darth Vader</td>
+                        <td class="py-2 px-3">Dark</td>
+                        <td class="py-2 px-3">Sith</td>
+                        <td class="py-2 px-3">20</td>
+                        <td class="py-2 px-3">25</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="py-2 mt-4">
+            <a href="#" class="text-blue-500 hover:underline">See More issues...</a>
+        </p>
+    </div>
+
+      </div>
+
+      <!-- Script for Charts -->
+      <script>
+        $(document).ready(function () {
+          var ctx1 = document.getElementById("chart1").getContext("2d");
+          var chart1 = new Chart(ctx1, {
+            type: "bar",
+            data: {
+              labels: ["January", "February", "March", "April", "May", "June"],
+              datasets: [
+                {
+                  label: "Maternal Deaths",
+                  data: [12, 19, 3, 5, 2, 3],
+                  backgroundColor: "rgba(255, 99, 132, 0.2)",
+                  borderColor: "rgba(255, 99, 132, 1)",
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            },
+          });
+
+          var ctx2 = document.getElementById("chart2").getContext("2d");
+          var chart2 = new Chart(ctx2, {
+            type: "line",
+            data: {
+              labels: ["January", "February", "March", "April", "May", "June"],
+              datasets: [
+                {
+                  label: "Perinatal Deaths",
+                  data: [3, 2, 2, 6, 5, 3],
+                  backgroundColor: "rgba(54, 162, 235, 0.2)",
+                  borderColor: "rgba(54, 162, 235, 1)",
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            },
+          });
+
+          var ctx3 = document.getElementById("chart3").getContext("2d");
+          var chart3 = new Chart(ctx3, {
+            type: "doughnut",
+            data: {
+              labels: ["Cause 1", "Cause 2", "Cause 3"],
+              datasets: [
+                {
+                  label: "Causes of Death",
+                  data: [10, 20, 30],
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.2)",
+                    "rgba(54, 162, 235, 0.2)",
+                    "rgba(255, 206, 86, 0.2)",
+                  ],
+                  borderColor: [
+                    "rgba(255, 99, 132, 1)",
+                    "rgba(54, 162, 235, 1)",
+                    "rgba(255, 206, 86, 1)",
+                  ],
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top",
+                },
+                tooltip: {
+                  enabled: true,
+                },
+              },
+            },
+          });
+        });
+      </script>
+    </div>
+  </main>
 </div>
-  {{ redirect_to_login_immediately }} {% endblock %}
-</body>
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+  Toastify({
+    text: "Dashboard loaded successfully",
+    duration: 3000,
+    gravity: "top",
+    position: "center",
+    backgroundColor: "#4a90e2",
+    stopOnFocus: true,
+  }).showToast();
+</script>
+{{ redirect_to_login_immediately }} {% endblock %}
