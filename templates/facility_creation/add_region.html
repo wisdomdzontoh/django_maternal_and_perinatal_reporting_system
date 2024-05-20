@@ -1,81 +1,112 @@
-{% extends 'authentication/dashboard_base.html' %} 
-{% block body %}
+{% extends 'authentication/dashboard_base.html' %} {% block body %}
 
-
-    <!-- Add ORG-UNIT Card -->
-    <div
-      class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+<!-- ORG-UNIT Card -->
+<div
+  class="bg-white p-6 rounded-lg shadow-lg flex items-center justify-between hover:bg-gray-100 mb-6"
+>
+  <div class="space-x-4">
+    <a
+      href="{% url 'facility_creation' %}"
+      class="bg-purple-600 text-white px-4 py-2 rounded-md shadow hover:bg-purple-700"
+      >View all</a
     >
-      <div>
-        <a
-          class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
-          href="{% url 'facility_creation' %}"
-          >View all</a
-        >
-        <a
-          class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
-          href="{% url 'view-all-facilities' %}"
-          >Facilities</a
-        >
-        <a
-          class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
-          href="{{ request.META.HTTP_REFERER }}"
-          >Go back</a
-        >
-      </div>
-    </div>
+    <a
+      href="{% url 'view-all-facilities' %}"
+      class="bg-red-600 text-white px-4 py-2 rounded-md shadow hover:bg-red-700"
+      >Facilities</a
+    >
+    <a
+      href="{{ request.META.HTTP_REFERER }}"
+      class="bg-blue-700 text-white px-4 py-2 rounded-md shadow hover:bg-blue-800"
+      >Go back</a
+    >
+  </div>
+</div>
 
-
-
-<div class="flex">
-  <div class="w-1/2 p-4">
-    <div class="card bg-white rounded-lg shadow-md">
-      <h2 class="text-2xl font-bold mb-4">
-        <i class="fa-solid fa-house-medical text-blue-500"></i> Add Region
+<div class="flex flex-wrap -mx-4">
+  <!-- Add Region -->
+  <div class="w-full md:w-1/2 p-4">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-blue-500 mb-4">
+        <i class="fa-solid fa-house-medical"></i> Add Region
       </h2>
-     
-      <div class="alert alert-success" role="alert">
+      <div>
         {% for message in messages %}
-          
+        <div class="alert alert-success">{{ message }}</div>
         {% endfor %}
       </div>
-    
-      <form class="shadow-md bg-white rounded-2xl p-4" method="POST">
+      <form class="space-y-4" method="POST">
         {% csrf_token %}
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="region_name">Region Name</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="region_name" name="region_name" type="text" placeholder="Enter region name" required />
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="region_name"
+            >Region Name</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="region_name"
+            name="region_name"
+            type="text"
+            placeholder="Enter region name"
+            required
+          />
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="region_code">Region Code</label>
-          <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="region_code" name="region_code" placeholder="Enter region code"></textarea>
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="region_code"
+            >Region Code</label
+          >
+          <textarea
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="region_code"
+            name="region_code"
+            placeholder="Enter region code"
+          ></textarea>
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="date_created">Date of creation</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date_created" type="date" name="date_created" placeholder="select date" required />
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="date_created"
+            >Date of creation</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="date_created"
+            type="date"
+            name="date_created"
+            placeholder="Select date"
+            required
+          />
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="created_by">Created By</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="created_by" type="text" value="{{ user.first_name }} {{ user.last_name }}" name="created_by" readonly required />
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="created_by"
+            >Created By</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="created_by"
+            type="text"
+            value="{{ user.first_name }} {{ user.last_name }}"
+            name="created_by"
+            readonly
+            required
+          />
         </div>
-        <div class="flex items-center justify-center">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Create Region</button>
+        <div class="text-center">
+          <button
+            class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700"
+            type="submit"
+          >
+            Create Region
+          </button>
         </div>
       </form>
-    
     </div>
   </div>
 
-
-
-<!--ADD DISTRICT-->
-  <div class="w-1/2 p-4">
-    <div class="card bg-white rounded-lg shadow-md">
-      <h2 class="text-2xl font-bold mb-4">
-        <i class="fa-solid fa-house-medical text-green-500"></i> Add District
+  <!-- Add District -->
+  <div class="w-full md:w-1/2 p-4">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-green-500 mb-4">
+        <i class="fa-solid fa-house-medical"></i> Add District
       </h2>
-     
-      <div class="alert alert-success" role="alert">
+      <div>
         {% for message in messages %}
         <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script>
@@ -90,154 +121,234 @@
         </script>
         {% endfor %}
       </div>
-     
-      <form class="shadow-md bg-white rounded-2xl p-4" method="POST">
+      <form class="space-y-4" method="POST">
         {% csrf_token %}
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="district_region">Region Name</label>
-          <select name="district_region" id="district_region" class="w-full bg-gray-100 rounded-md border border-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-500">
+        <div>
+          <label
+            class="block text-gray-700 font-medium mb-2"
+            for="district_region"
+            >Region Name</label
+          >
+          <select
+            class="w-full p-3 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="district_region"
+            id="district_region"
+          >
             {% for region in regions %}
             <option value="{{ region.id }}">{{ region.region_name }}</option>
             {% endfor %}
           </select>
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="district_name">District Name</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="district_name" name="district_name" type="text" placeholder="Enter district name" required />
+        <div>
+          <label
+            class="block text-gray-700 font-medium mb-2"
+            for="district_name"
+            >District Name</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="district_name"
+            name="district_name"
+            type="text"
+            placeholder="Enter district name"
+            required
+          />
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="district_code">District Code</label>
-          <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="district_code" name="district_code" placeholder="Enter district code"></textarea>
+        <div>
+          <label
+            class="block text-gray-700 font-medium mb-2"
+            for="district_code"
+            >District Code</label
+          >
+          <textarea
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="district_code"
+            name="district_code"
+            placeholder="Enter district code"
+          ></textarea>
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="date_created">Date of creation</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date_created" type="date" name="date_created" placeholder="select date" required />
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="date_created"
+            >Date of creation</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="date_created"
+            type="date"
+            name="date_created"
+            placeholder="Select date"
+            required
+          />
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="created_by">Created By</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="created_by" type="text" value="{{ user.first_name }} {{ user.last_name }}" name="created_by" readonly required />
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="created_by"
+            >Created By</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="created_by"
+            type="text"
+            value="{{ user.first_name }} {{ user.last_name }}"
+            name="created_by"
+            readonly
+            required
+          />
         </div>
-        <div class="flex items-center justify-center">
-          <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Create District</button>
+        <div class="text-center">
+          <button
+            class="bg-green-600 text-white px-6 py-2 rounded-lg shadow hover:bg-green-700"
+            type="submit"
+          >
+            Create District
+          </button>
         </div>
       </form>
     </div>
   </div>
 
-
-
-
-<!--ADD FACILITY-->
-  <div class="w-1/2 p-4">
-    <div class="card bg-white rounded-lg shadow-md">
-      <h2 class="text-2xl font-bold mb-4">
-        <i class="fa-solid fa-house-medical text-yellow-500"></i> Add Facility
+  <!-- Add Facility -->
+  <div class="w-full md:w-1/2 p-4">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-yellow-500 mb-4">
+        <i class="fa-solid fa-house-medical"></i> Add Facility
       </h2>
-      <div class="alert alert-success" role="alert">
-        {% for message in messages %}
-          
-        {% endfor %}
-      </div>
-      <form class="shadow-md bg-white rounded-2xl p-4" method="POST">
+      <div>{% for message in messages %} {% endfor %}</div>
+      <form class="space-y-4" method="POST">
         {% csrf_token %}
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="facility_region">Region Name</label>
-            <select name="facility_region" id="facility_region" class="w-full bg-gray-100 rounded-md border border-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-500">
-                {% for region in regions %}
-                    <option value="{{ region.id }}">{{ region.region_name }}</option>
-                {% endfor %}
-            </select>
+        <div>
+          <label
+            class="block text-gray-700 font-medium mb-2"
+            for="facility_region"
+            >Region Name</label
+          >
+          <select
+            class="w-full p-3 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="facility_region"
+            id="facility_region"
+          >
+            {% for region in regions %}
+            <option value="{{ region.id }}">{{ region.region_name }}</option>
+            {% endfor %}
+          </select>
         </div>
-        <!-- District dropdown -->
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="facility_district">District Name</label>
-            <select name="facility_district" id="facility_district" class="w-full bg-gray-100 rounded-md border border-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-500">
-                <!-- Options will be populated dynamically via AJAX -->
-            </select>
+        <div>
+          <label
+            class="block text-gray-700 font-medium mb-2"
+            for="facility_district"
+            >District Name</label
+          >
+          <select
+            class="w-full p-3 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            name="facility_district"
+            id="facility_district"
+          >
+            <!-- Options will be populated dynamically via AJAX -->
+          </select>
         </div>
-          <!--end of district dropdown-->
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="district_name">Facility Name</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="facility_name" name="facility_name" type="text" placeholder="Enter facility name" required />
+        <div>
+          <label
+            class="block text-gray-700 font-medium mb-2"
+            for="facility_name"
+            >Facility Name</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="facility_name"
+            name="facility_name"
+            type="text"
+            placeholder="Enter facility name"
+            required
+          />
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="district_code">Facility Code</label>
-          <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="facility_code" name="facility_code" placeholder="Enter facility code"></textarea>
+        <div>
+          <label
+            class="block text-gray-700 font-medium mb-2"
+            for="facility_code"
+            >Facility Code</label
+          >
+          <textarea
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="facility_code"
+            name="facility_code"
+            placeholder="Enter facility code"
+          ></textarea>
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="date_created">Date of creation</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date_created" type="date" name="date_created" placeholder="select date" required />
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="date_created"
+            >Date of creation</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="date_created"
+            type="date"
+            name="date_created"
+            placeholder="Select date"
+            required
+          />
         </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="created_by">Created By</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="created_by" type="text" value="{{ user.first_name }} {{ user.last_name }}" name="created_by" readonly required />
+        <div>
+          <label class="block text-gray-700 font-medium mb-2" for="created_by"
+            >Created By</label
+          >
+          <input
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="created_by"
+            type="text"
+            value="{{ user.first_name }} {{ user.last_name }}"
+            name="created_by"
+            readonly
+            required
+          />
         </div>
-        <div class="flex items-center justify-center">
-          <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Create Facility</button>
+        <div class="text-center">
+          <button
+            class="bg-yellow-600 text-white px-6 py-2 rounded-lg shadow hover:bg-yellow-700"
+            type="submit"
+          >
+            Create Facility
+          </button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
-
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Function to fetch districts based on selected region
-        function fetchDistricts(regionId) {
-            $.ajax({
-                url: "{% url 'get_districts' %}", // URL to fetch districts
-                type: "GET",
-                data: {
-                    region_id: regionId,
-                },
-                success: function(response) {
-                    // Clear previous options
-                    $('#facility_district').empty();
-                    
-                    // Add new options for districts
-                    $.each(response.districts, function(index, district) {
-                        $('#facility_district').append($('<option>', {
-                            value: district.id,
-                            text: district.district_name
-                        }));
-                    });
-                },
-                error: function(xhr, errmsg, err) {
-                    console.log("Error:", errmsg);
-                    // Handle error if needed
-                }
-            });
-        }
+  $(document).ready(function () {
+    function fetchDistricts(regionId) {
+      $.ajax({
+        url: "{% url 'get_districts' %}",
+        type: "GET",
+        data: { region_id: regionId },
+        success: function (response) {
+          $("#facility_district").empty();
+          $.each(response.districts, function (index, district) {
+            $("#facility_district").append(
+              $("<option>", {
+                value: district.id,
+                text: district.district_name,
+              })
+            );
+          });
+        },
+        error: function (xhr, errmsg, err) {
+          console.log("Error:", errmsg);
+        },
+      });
+    }
 
-        // Event listener for region dropdown change
-        $('#facility_region').on('change', function() {
-            var selectedRegionId = $(this).val();
-            fetchDistricts(selectedRegionId);
-        });
+    $("#facility_region").on("change", function () {
+      var selectedRegionId = $(this).val();
+      fetchDistricts(selectedRegionId);
     });
+  });
 </script>
-
-
 
 <script>
   flatpickr("#date_created", {
-    dateFormat: "Y-m-d", // Set the date format
-    // You can customize other options as needed
-  });
-
-  $(document).ready(function() {
-    $('#district_region').select2({
-      placeholder: 'Select a region',
-      allowClear: true // Optional: Add a clear button
-    });
-    $("#facility_region").select2();
-    $("#facility_district").select2();
+    dateFormat: "Y-m-d",
   });
 </script>
 
-
 {% endblock %}
-</body>

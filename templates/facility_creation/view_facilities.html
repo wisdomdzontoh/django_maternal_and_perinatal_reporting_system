@@ -2,104 +2,100 @@
 
 <!-- Health Informatics Module -->
 
-  <!-- Add ORG-UNIT Card -->
-  <div
-    class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
-  >
-    <div>
-      <a
-        class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
-        href="{% url 'facility_creation' %}"
-        >View all Org Unit</a
-      >
-      <a
-        class="bg-green-500 inline-block px-4 py-2 text-sm text-white rounded"
-        href="{% url 'add_region' %}"
-        >Create Org Unit</a
-      >
-      <a
-        class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
-        href="{{ request.META.HTTP_REFERER }}"
-        >Go back</a
-      >
-    </div>
-    <!-- Filter Form -->
-    <div class="flex justify-center mb-4">
-      <form
-        method="GET"
-        action="{% url 'filter-facility' %}"
-        class="flex gap-4"
-      >
-        <input
-          type="text"
-          name="facility_district"
-          placeholder="district name"
-          class="p-2 rounded-md border-gray-300"
-        />
-        <input
-          type="text"
-          name="facility_name"
-          placeholder="facility Name"
-          class="p-2 rounded-md border-gray-300"
-        />
-
-        <button
-          type="submit"
-          class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
-        >
-          Filter
-        </button>
-      </form>
-    </div>
+<!-- Add ORG-UNIT Card -->
+<div
+  class="bg-white p-6 rounded-lg shadow-lg flex items-center justify-between hover:bg-gray-100 mb-6"
+>
+  <div class="space-x-4">
+    <a
+      href="{% url 'facility_creation' %}"
+      class="bg-purple-600 text-white px-4 py-2 rounded-md shadow hover:bg-purple-700"
+      >View all Org Unit</a
+    >
+    <a
+      href="{% url 'add_region' %}"
+      class="bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700"
+      >Create Org Unit</a
+    >
+    <a
+      href="{{ request.META.HTTP_REFERER }}"
+      class="bg-blue-700 text-white px-4 py-2 rounded-md shadow hover:bg-blue-800"
+      >Go back</a
+    >
   </div>
 
-
-<div class="alert alert-success" role="alert">
-  {% for message in messages %}
-        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-        <script>
-          Toastify({
-            text: "{{ message }}",
-            duration: 3000,
-            gravity: "top",
-            position: "center",
-            backgroundColor: "green",
-            stopOnFocus: true,
-          }).showToast();
-        </script>
-        {% endfor %}
+  <!-- Filter Form -->
+  <div class="flex justify-center mb-4">
+    <form method="GET" action="{% url 'filter-facility' %}" class="flex gap-4">
+      <input
+        type="text"
+        name="facility_district"
+        placeholder="District Name"
+        class="p-2 rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <input
+        type="text"
+        name="facility_name"
+        placeholder="Facility Name"
+        class="p-2 rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="submit"
+        class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md shadow hover:bg-blue-700"
+      >
+        Filter
+      </button>
+    </form>
+  </div>
 </div>
 
+<!-- Success Messages -->
+<div class="container mx-auto mb-6">
+  {% for message in messages %}
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script>
+    Toastify({
+      text: "{{ message }}",
+      duration: 3000,
+      gravity: "top",
+      position: "center",
+      backgroundColor: "green",
+      stopOnFocus: true,
+    }).showToast();
+  </script>
+  {% endfor %}
+</div>
 
+<!-- Facilities Table -->
 <div class="container mx-auto mt-8">
   <table
-    class="min-w-full divide-y divide-gray-200 rounded-md shadow overflow-hidden w-full"
+    class="min-w-full divide-y divide-gray-200 rounded-lg shadow overflow-hidden w-full"
   >
     <!-- Table Header -->
     <thead>
       <tr>
         <th
-          class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+          class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
         >
           Region
         </th>
         <th
-          class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+          class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
         >
           District
         </th>
         <th
-          class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+          class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
         >
           Facility
         </th>
         <th
-          class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-extrabold text-gray-500 uppercase tracking-wider"
+          class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
         >
           Facility Code
         </th>
         <th
-          class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-extrabold bg-gray-50"
+          class="px-6 py-4 bg-gray-50 text-right text-xs font-bold text-gray-500 uppercase tracking-wider"
         >
           Action
         </th>
@@ -113,36 +109,32 @@
         <td class="px-6 py-4 whitespace-no-wrap">
           <a
             href="{% url 'edit-facility' facility.id %}"
-            class="text-blue-900 hover:text-blue-900 mr-2"
+            class="text-blue-900 hover:underline"
             >{{ facility.facility_region }}</a
           >
         </td>
-
         <td class="px-6 py-4 whitespace-no-wrap">
           <a
             href="{% url 'edit-facility' facility.id %}"
-            class="text-blue-900 hover:text-blue-900 mr-2"
+            class="text-blue-900 hover:underline"
+            >{{ facility.facility_district }}</a
           >
-            {{ facility.facility_district }}
-          </a>
         </td>
         <td class="px-6 py-4 whitespace-no-wrap">
           <a
             href="{% url 'edit-facility' facility.id %}"
-            class="text-blue-900 hover:text-blue-900 mr-2"
+            class="text-blue-900 hover:underline"
+            >{{ facility.facility_name }}</a
           >
-          {{ facility.facility_name }}
-        </td></a>
+        </td>
         <td class="px-6 py-4 whitespace-no-wrap">
           <a
             href="{% url 'edit-facility' facility.id %}"
-            class="text-blue-900 hover:text-blue-900 mr-2"
+            class="text-blue-900 hover:underline"
+            >{{ facility.facility_code }}</a
           >
-          {{ facility.facility_code }}</a>
         </td>
-        <td
-          class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium"
-        >
+        <td class="px-6 py-4 whitespace-no-wrap text-right text-sm font-medium">
           <form
             action="{% url 'facilities/delete' facility.id %}"
             method="post"
@@ -151,20 +143,23 @@
             {% csrf_token %}
             <button
               type="submit"
-              class="text-red-600 hover:text-red-900"
+              class="text-red-600 hover:text-red-800"
               onclick="return confirm('Are you sure you want to delete this service?')"
             >
-              <i class="fa-solid fa-trash-can fa-2x"></i>
+              <i class="fa-solid fa-trash-can fa-lg"></i>
             </button>
           </form>
         </td>
       </tr>
       {% endfor %} {% else %}
       <tr>
-        <td colspan="5" class="py-8 px-2 text-center">No facilities found</td>
+        <td colspan="5" class="py-8 px-2 text-center text-gray-500">
+          No facilities found
+        </td>
       </tr>
       {% endif %}
     </tbody>
   </table>
 </div>
- {% endblock %}
+
+{% endblock %}

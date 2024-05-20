@@ -65,7 +65,7 @@ def add_region(request):
                     created_by=created_by,
                 )
                 region.save()
-                messages.success(request, 'Region added successfully.')
+                messages.success(request, f'{region.region_name} Region added successfully.')
                 return redirect('add_region')  # Redirect to the same page after successful submission
         
         elif 'district_region' in request.POST and 'district_name' in request.POST:
@@ -86,7 +86,7 @@ def add_region(request):
                     created_by=created_by,
                 )
                 district.save()
-                messages.success(request, 'District added successfully.')
+                messages.success(request, f'{district.district_name} District added successfully.')
                 return redirect('add_region')  # Redirect to the same page after successful submission
 
         elif 'facility_region' in request.POST and 'facility_district' in request.POST and 'facility_name' in request.POST:
@@ -111,7 +111,7 @@ def add_region(request):
                     created_by=created_by,
                 )
                 facility.save()
-                messages.success(request, 'Facility added successfully.')
+                messages.success(request, f'{facility_name} added successfully.')
                 return redirect('add_region')  # Redirect to the same page after successful submission
    
     return render(request, 'facility_creation/add_region.html', context)
@@ -173,7 +173,7 @@ def edit_facility(request, id):
         facility.created_by = created_by
         
         facility.save()  # Save the changes
-        messages.success(request, 'Facility updated successfully.')
+        messages.success(request, f'{facility.facility_name} updated successfully.')
         return redirect('view-all-facilities')  # Redirect to the same page after successful submission
     return render(request, 'facility_creation/edit_facility.html', context)
 

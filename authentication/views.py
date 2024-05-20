@@ -5,6 +5,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout #authentication models views
 from django.contrib.auth.decorators import login_required
 from facility_creation.models import Region, District, Facility
+from maternal_entry.models import MaternalEntry
 
 # Create your views here.
 def homepage(request):
@@ -70,6 +71,13 @@ def dashboard(request):
     total_facilities = Facility.objects.count()
     total_districts = District.objects.count()
     total_regions = Region.objects.count()
+    total_maternal_deaths = MaternalEntry.objects.count()
+    total_audited = MaternalEntry.objects.filter(isAudited=True).count()
+    total_unaudited = total_maternal_deaths - total_audited
+    percent_audited = (total_audited / total_maternal_deaths) * 100
+    entries = MaternalEntry.objects.all()[:3]
+    
+    
     
     
     context = {
@@ -79,6 +87,10 @@ def dashboard(request):
         "regions": regions,
         "districts": districts,
         "facilities": facilities,
+        "total_maternal_deaths": total_maternal_deaths,
+        "percent_audited": percent_audited,
+        "entries": entries,
+        "total_unaudited": total_unaudited,
         
     }
     return render(request, 'authentication/dashboard.html', context)

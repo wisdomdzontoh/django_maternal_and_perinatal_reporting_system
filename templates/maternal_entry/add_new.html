@@ -1653,7 +1653,7 @@
                   Committe Chairman Name
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   name="committee_chairman_name"
                   id="committee_chairman_name"
                   placeholder="eg. Will Smith"
@@ -1751,6 +1751,7 @@
                 <button
                   class="bg-green-300 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
+                  onclick="return confirm('Are you sure you want to add this entry?, entries cannot be deleted or altered')"
                 >
                   Submit entry
                 </button>
@@ -1779,6 +1780,21 @@
         success: function (response) {
           // Clear previous options
           $("#facility_district, #facility_name").empty();
+
+          // Add new options for districts
+          $.each(response.districts, function (index, district) {
+            var option = $("<option>", {
+              value: district.id,
+              text: district.district_name,
+            });
+
+            // Set the selected attribute if this is the selected district
+            if (district.id == districtId) {
+              option.attr("selected", "selected");
+            }
+
+            $("#facility_district").append(option);
+          });
 
           // Add new options for districts
           $.each(response.districts, function (index, district) {
@@ -1879,21 +1895,6 @@
       dateFormat: "H:i",
       time_24hr: true,
       allowInput: true,
-    });
-  });
-
-  $(document).ready(function () {
-    $("#facility_region").select2({
-      placeholder: "Select a region",
-      allowClear: true, // Optional: Add a clear button
-    });
-    $("#facility_name").select2({
-      placeholder: "Select a region",
-      allowClear: true, // Optional: Add a clear button
-    });
-    $("#facility_district").select2({
-      placeholder: "Select a region",
-      allowClear: true, // Optional: Add a clear button
     });
   });
 
@@ -2050,6 +2051,9 @@
     $("#intrapartum").select2();
     $("#postpartum").select2();
     $("#other_options").select2();
+    $("#facility_region").select2();
+    $("#facility_district").select2();
+    $("#facility_name").select2();
   });
 </script>
 {% endblock %}
