@@ -1724,27 +1724,17 @@
             </div>
             <div class="w-full lg:w-6/12 px-4">
               <div class="relative w-full mb-3">
-                <label
-                  for="isAudited"
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlfor="grid-password"
-                >
-                  Is death Audited
-                </label>
-                <div class="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="isAudited"
-                    name="isAudited"
-                    class="h-8 w-8 text-green-600 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <label
-                    for="isAudited"
-                    class="ml-2 block text-sm text-gray-900"
-                    >Yes</label
-                  >
-                </div>
+                  <label for="isAudited" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">Is death Audited</label>
+                  <div class="flex items-center">
+                      <!-- Switch -->
+                      <input type="checkbox" id="isAudited" name="isAudited" class="hidden" />
+                      <label for="isAudited" class="toggle-label">
+                          <div class="toggle-box"></div>
+                      </label>
+                      <label for="isAudited" class="ml-2 block text-sm text-gray-900">Yes</label>
+                  </div>
               </div>
+          </div>
             </div>
             <div class="w-full lg:w-4/12 px-4">
               <div class="relative w-full mb-3">

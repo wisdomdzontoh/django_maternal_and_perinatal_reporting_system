@@ -225,6 +225,57 @@
         text-align: right;
       }
       /*end*/
+
+      /*switch button for maternal entry*/
+      /* Switch Styles */
+      .toggle-label {
+        position: relative;
+        display: inline-block;
+        width: 48px;
+        height: 24px;
+      }
+
+      .toggle-label .toggle-box {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 9999px;
+      }
+
+      .toggle-label .toggle-box:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 9999px;
+      }
+
+      input[type="checkbox"]:checked + .toggle-label .toggle-box {
+        background-color: green;
+      }
+
+      input[type="checkbox"]:checked + .toggle-label .toggle-box:before {
+        transform: translateX(24px);
+      }
+
+      /* Hide the default checkbox */
+      input[type="checkbox"].hidden {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+      /*end*/
     </style>
   </head>
   <body class="bg-gray-100">

@@ -74,10 +74,9 @@ def dashboard(request):
     total_maternal_deaths = MaternalEntry.objects.count()
     total_audited = MaternalEntry.objects.filter(isAudited=True).count()
     total_unaudited = total_maternal_deaths - total_audited
-    percent_audited = (total_audited / total_maternal_deaths) * 100
+    # Calculate the percentage audited rounded to 2 decimal places
+    percent_audited = round((total_audited / total_maternal_deaths) * 100, 2)
     entries = MaternalEntry.objects.all()[:3]
-    
-    
     
     
     context = {
