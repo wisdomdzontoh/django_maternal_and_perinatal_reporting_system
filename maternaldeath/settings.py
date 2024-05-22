@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',      #jazzmin for admin ui
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,9 +45,12 @@ INSTALLED_APPS = [
     
     
     
+    'data_wizard',
+    'data_wizard.sources',   #data wizard for importing data
     'tailwind', #tailwind library
     'theme',
     'django_browser_reload',  #for automatic reloads
+    'import_export',        #for importing and exporting data in admin
 ]
 
 

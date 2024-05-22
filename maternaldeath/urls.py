@@ -20,6 +20,9 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
     
-     path("__reload__/", include("django_browser_reload.urls")),
+    
+    
+    path('datawizard/', include('data_wizard.urls')),       #url for data wizard
+    path("__reload__/", include("django_browser_reload.urls")),
     
 ]
