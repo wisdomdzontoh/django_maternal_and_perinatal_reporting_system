@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     
+    path('maternal_entry/view_entry/<int:id>/', views.view_entry, name="view_entry"),  # Adjusted URL pattern
     path('filter-deaths/', views.filter_deaths, name='filter-deaths'),
     path('maternal_entry/view_all', views.view_all, name="view_all"),  # Adjusted URL pattern
     path('get_districts_and_facilities/', views.get_districts_and_facilities, name='get_districts_and_facilities'),

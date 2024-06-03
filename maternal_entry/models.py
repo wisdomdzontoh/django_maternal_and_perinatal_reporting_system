@@ -227,19 +227,19 @@ class MaternalEntry(models.Model):
     age = models.IntegerField(null=True)
     educational_status = models.CharField(max_length=100, choices=EDUCATION_CHOICES, default="none")
     occupation = models.CharField(max_length=100, choices=OCCUPATION_CHOICES, default="unemployed")
-    other_occupation = models.CharField(max_length=100, null=True)
+    other_occupation = models.CharField(max_length=100, null=True, default="none")
     marital_status = models.CharField(max_length=100, choices=MARITAL_STATUS_CHOICES, default="never married")
     religion = models.CharField(max_length=100, choices=RELIGION_CHOICES, default="christian")
-    other_religion = models.CharField(max_length=100)
+    other_religion = models.CharField(max_length=100, default="none")
     ethnicity = models.CharField(max_length=100, choices=ETHNICITY_CHOICES, default="akan")
-    other_ethnicity = models.CharField(max_length=100)
-    gravidity = models.CharField(max_length=100)
-    parity = models.CharField(max_length=100)
+    other_ethnicity = models.CharField(max_length=100, default="none")
+    gravidity = models.CharField(max_length=100, default="none")
+    parity = models.CharField(max_length=100, default="none")
     anc = models.CharField(max_length=50, choices=MULTI_CHOICES, default="yes")
     total_anc_visits = models.IntegerField(default=0)
     place_of_anc = models.CharField(max_length=100, choices=PLACE_OF_ANC_CHOICES)
     #other_place_of_anc = models.CharField(max_length=100, default="none")
-    gestational_age = models.IntegerField(default="0")
+    gestational_age = models.IntegerField(default=0)
     identified_risk_factors = models.TextField(choices=IDENTIFIED_RISK_CHOICES, null=True)        #Multiple select field
     other_risk_factors = models.CharField(max_length=100, default="none", null=True)
     hiv_status = models.CharField(max_length=50, choices=HIV_STATUS_CHOICES, default="non-reactive")
@@ -248,7 +248,7 @@ class MaternalEntry(models.Model):
     time_of_arrival = models.TimeField()
     time_treatment_started = models.TimeField(null=True)
     referral_from_another_facility = models.CharField(max_length=50, choices=MULTI_CHOICES, null=True)
-    referral_from_where = models.CharField(max_length=100)
+    referral_from_where = models.CharField(max_length=100, default="none")
     time_to_reach_facility = models.IntegerField(null=True)
     transport_type = models.CharField(max_length=100, choices=TRANSPORT_TYPE_CHOICES, null=True)
     other_transport_type = models.CharField(max_length=100, null=True)
@@ -272,11 +272,11 @@ class MaternalEntry(models.Model):
     other_place_of_death = models.CharField(max_length=100, default="none", null=True)
     date_of_death = models.DateField(default=timezone.now, null=True)
     time_of_death = models.TimeField()
-    early_pregnancy = models.TextField(choices=EARLY_PREGNANCY_CHOICES, null=True)        #Multiple select field
-    antenatal = models.TextField(choices=ANTENATAL_CHOICES, null=True)              #Multiple select field
-    intrapartum = models.TextField(choices=INTRAPARTUM_CHOICES, null=True)              #Multiple select field
-    postpartum = models.TextField(choices=POSTPARTUM_CHOICES, null=True)              #Multiple select field
-    other_options = models.TextField(choices=OTHER_OPTIONS, null=True)
+    early_pregnancy = models.TextField(choices=EARLY_PREGNANCY_CHOICES, null=True, default="none")        #Multiple select field
+    antenatal = models.TextField(choices=ANTENATAL_CHOICES, null=True, default="none")              #Multiple select field
+    intrapartum = models.TextField(choices=INTRAPARTUM_CHOICES, null=True, default="none")              #Multiple select field
+    postpartum = models.TextField(choices=POSTPARTUM_CHOICES, null=True, default="none")              #Multiple select field
+    other_options = models.TextField(choices=OTHER_OPTIONS, null=True, default="none")
     other_interventions = models.CharField(max_length=100, default="none", null=True)
     #SECTION:G, MORTALITY DETAILS
     autopsy_performed = models.CharField(max_length=50, choices=MULTI_CHOICES)
@@ -289,20 +289,20 @@ class MaternalEntry(models.Model):
     other_primary_obstetric_COD = models.TextField(null=True)    #Multiple select field
     #SECTION:H CONTRIBUTORY FACTORS
     delay_in_seeking_help = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
-    specify_delay_in_seeking_help = models.CharField(max_length=250, null=True)
+    specify_delay_in_seeking_help = models.CharField(max_length=250, null=True, default="none")
     lack_of_transport_from_home = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
-    specify_lack_of_transport_from_home = models.CharField(max_length=250, null=True)
+    specify_lack_of_transport_from_home = models.CharField(max_length=250, null=True, default="none")
     declined_treatment_admission = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
-    specify_declined_treatment_admission = models.CharField(max_length=250, null=True)
+    specify_declined_treatment_admission = models.CharField(max_length=250, null=True, default="none")
     lack_of_transport_from_home_to_facility = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
-    specify_lack_of_transport_from_home_to_facility = models.CharField(max_length=250, null=True)
+    specify_lack_of_transport_from_home_to_facility = models.CharField(max_length=250, null=True, default="none")
     lack_of_transport_between_facility = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)
-    specify_lack_of_transport_between_facility = models.CharField(max_length=250, null=True)
+    specify_lack_of_transport_between_facility = models.CharField(max_length=250, null=True, default="none")
     hf_communication_breakdown = models.CharField(max_length=50, choices=MULTI_CHOICES, default="no", null=True)     #hf - health facility
-    specify_hf_communication_breakdown = models.CharField(max_length=250, null=True)                    #hf - health facility
+    specify_hf_communication_breakdown = models.CharField(max_length=250, null=True, default="none")                    #hf - health facility
     potential_avoidable_factors = models.TextField(default="none")        #Summary of potential avoidable factors, missed opportunities and substandard care
-    lessons_learnt = models.TextField()         #What has your facility learnt from this case and what changes have been instituted?
-    recommendations = models.TextField()        #Recommendations and Further Actions to be Taken
+    lessons_learnt = models.TextField(default="none")         #What has your facility learnt from this case and what changes have been instituted?
+    recommendations = models.TextField(default="none")        #Recommendations and Further Actions to be Taken
     isAudited = models.CharField(max_length=100, choices=AUDITED_CHOICES, default="yes")
     #SECTION: I DETAILS OF REPORTERS
     names_of_team_members = models.TextField()

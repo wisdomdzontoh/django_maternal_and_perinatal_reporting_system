@@ -1,0 +1,1253 @@
+{% extends 'authentication/dashboard_base.html' %} {% block body %}
+
+<div
+  class="bg-white p-4 rounded-md shadow-md flex items-center justify-between hover:bg-gray-100"
+>
+  <div>
+    <a
+      class="bg-gray-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{% url 'dashboard' %}"
+      >Go to Dashboard</a
+    >
+    <a
+      class="bg-purple-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{% url 'add_new' %}"
+      >Add New</a
+    >
+    <a
+      class="bg-red-500 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{% url 'view_all' %}"
+      >View entries</a
+    >
+    <a
+      class="bg-blue-950 inline-block px-4 py-2 text-sm text-white rounded"
+      href="{{ request.META.HTTP_REFERER }}"
+      >Go back</a
+    >
+  </div>
+</div>
+
+
+<!--form section-->
+<section class="py-1 bg-gray-200">
+    <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
+      <div
+        class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+      >
+        <div class="rounded-t bg-white mb-0 px-6 py-6">
+          <div class="text-center flex justify-between">
+            <h6 class="text-blueGray-700 text-xl font-bold">
+             {{ entry_record.facility_name.facility_name }}
+            </h6>
+            {% if entry_record.isAudited == 'True' %}
+                <span class="px-2 inline-flex leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                    <i class="fa-solid fa-circle-check text-2xl"></i>
+                    <h1 class="inline-block ml-2">Audited</h1>
+                </span>
+            {% else %}
+                <span class="px-2 inline-flex leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                    <i class="fa-solid fa-circle-exclamation text-2xl"></i>
+                    <h1 class="inline-block ml-2">Unaudited</h1>
+                </span>
+            {% endif %}
+            <button
+              class="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+              type="button"
+            >
+              Print Form
+            </button>
+          </div>
+        </div>
+        
+        <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+          <form method="POST">
+            {% csrf_token %}
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              Facility and Bio-Data
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xl font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Region
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.facility_region.region_name }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xl font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    District
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.facility_district.district_name }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xl font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Facility
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.facility_name.facility_name }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Name of deceased
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.name_of_deceased }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    for="age"
+                  >
+                    Age
+                  </label>
+                  <div class="flex items-center">
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.age }}" readonly/>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    for="date_of_birth"
+                    >Date of birth
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.date_of_birth }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Educational Status
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.educational_status }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Occupation
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.occupation }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Other occupation (Specify)
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.other_occupation }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Marital Status
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.marital_status }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Religion
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.religion }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Other Religion (Specify)
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.other_religion }}" readonly/>
+                </div>
+              </div>
+  
+              <!--ethnicity-->
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Ethnicity
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.ethnicity }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-1xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Other Ethnicity (Specify)
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.other_ethnicity }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              SECTION B: OBSTETRIC INFORMATION
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Gravidity
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.gravidity }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Parity (include current delivery)
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.parity }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    ANC during this pregnancy?
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.anc }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3"></div>
+                <!--empty field div-->
+              </div>
+              <!--starts from here-->
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Total No. of ANC Visits
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.total_anc_visits }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Place of ANC
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.place_of_anc }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Gestational Age at booking
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.gestational_age }}" readonly/>
+                </div>
+              </div>
+              <!--above is the closing div-->
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Identified ANC risk factor(s)
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.identified_risk_factors }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    other Identified ANC risk factor(s)
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.other_risk_factors }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    HIV status
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.hiv_status }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Put on ARV
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.on_ARV }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Date of arrival
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.date_of_arrival }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Time of arrival
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.time_of_arrival }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Time Treatment Started
+                  </label>
+                  <input 
+                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  type="text" value="{{ entry_record.time_treatment_started }}" readonly/>
+                </div>
+              </div>
+  
+              <hr class="mt-6 border-b-1 border-blueGray-300" />
+              <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                SECTION B: OBSTETRIC INFORMATION
+              </h6>
+              <div class="flex flex-wrap">
+                <div class="w-full lg:w-12/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlfor="grid-password"
+                    >
+                      Referral from another health facility?
+                    </label>
+                    
+                    <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.anc }}" readonly/>
+                  </div>
+                </div>
+                <div class="w-full lg:w-4/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlfor="grid-password"
+                    >
+                      Referral from where?
+                    </label>
+                    <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.referral_from_where }}" readonly/>
+                  </div>
+                </div>
+                <div class="w-full lg:w-4/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlfor="grid-password"
+                    >
+                      Time taken for client to reach facility
+                    </label>
+                    <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.time_to_reach_facility }} minutes" readonly/>
+                  </div>
+                </div>
+                <div class="w-full lg:w-4/12 px-4">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlfor="grid-password"
+                    >
+                      Transport type did she arrive with?
+                    </label>
+                    <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.transport_type }}" readonly/>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Other transport specify
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.other_transport_type }}" readonly/>
+                </div>
+              </div>
+              <!--last div-->
+            </div>
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              SECTION D: LABOUR & DELIVERY
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Did labour occur?
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.labour_occur }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Was labour induced?
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.labour_induced }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Was labour augmented?
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.labour_augmented }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Was partograph used?
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.photograph_used }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Active phase
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.active_phase }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Second phase (Hours)
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.second_stage }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Third Stage (mins)
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.third_stage }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Did patient deliver?
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.patient_deliver }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Days since termination (delivery/abortion/ectopic)
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.days_since_termination }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Place of Death
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.place_of_death }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Other place of death (specify)
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.other_place_of_death }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Date of death
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.date_of_death }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Time of death
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.time_of_death }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              SECTION E: INTERVENTIONS (select multiple)
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Early Pregnancy
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.early_pregnancy }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Antenatal
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.antenatal }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Intrapartum
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.intrapartum }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Postpartum
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.postpartum }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Others
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.other_options }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Other interventions not listed
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.other_interventions }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+  
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              SECTION:H CONTRIBUTORY FACTORS
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Was Autopsy performed
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.autopsy_performed }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Date Autopsy Performed
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.date_autopsy_performed }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Place Autopsy Performed
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.place_autopsy_performed }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Autopsy Performed by
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.autopsy_performed_by }}" readonly/>
+                </div>
+              </div>
+  
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Specify autopsy performed by
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.other_autopsy_performed_by }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+  
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              CAUSE OF DEATH
+            </h6>
+            <div class="w-full lg:w-12/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Final Cause of Death
+                </label>
+                <textarea
+                readonly
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                rows="4"
+                >{{ entry_record.final_COD }}</textarea>
+              </div>
+            </div>
+  
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Primary (Underlying) Obstetric Cause of Death
+                </label>
+                <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.primary_obstetric_COD }}" readonly/>
+              </div>
+            </div>
+  
+            <div class="w-full lg:w-4/12 px-4">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlfor="grid-password"
+                >
+                  Other (eg anaesthesia):
+                </label>
+                <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.other_autopsy_performed_by }}" readonly/>
+              </div>
+            </div>
+  
+            <!--contributory factors-->
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+  
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              SECTION H: CONTRIBUTORY FACTORS
+            </h6>
+            <p class="text-red-400 text-sm mt-3 mb-6 font-bold uppercase">
+              IN YOUR OPINION DID ANY OF THE FOLLOWING FACTORS CONTRIBUTE TO THE
+              DEATH OF THIS PATIENT
+            </p>
+            <h5>Personal/Family /Community Factors</h5>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Delay in woman seeking help
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.delay_in_seeking_help }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Specify
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.specify_delay_in_seeking_help }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Declined treatment or admission
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.declined_treatment_admission }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Specify
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.specify_declined_treatment_admission }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <h5>Transport and Communication Systems</h5>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Lack of Transport from home to reach facility
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.lack_of_transport_from_home }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Specify
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.specify_lack_of_transport_from_home }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Lack of Transport between Health Care Facilities
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.lack_of_transport_between_facility }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Specify
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.specify_lack_of_transport_between_facility }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Health Service to Health Service Communication breakdown
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.hf_communication_breakdown }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Specify
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.specify_hf_communication_breakdown }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+  
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              Key notes to take from this case
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Summary of potential avoidable factors, missed opportunities
+                    and substandard care
+                  </label>
+                  <textarea
+                    type="text"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    rows="4"
+                  >{{ entry_record.potential_avoidable_factors }}</textarea>
+                </div>
+              </div>
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    What has your facility learnt from this case and what changes
+                    have been instituted?
+                  </label>
+                  <textarea
+                    type="text"
+                    name="lessons_learnt"
+                    id="lessons_learnt"
+                    placeholder="lessons to learnt"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    rows="4"
+                  >{{ entry_record.lessons_learnt }}</textarea>
+                </div>
+              </div>
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Recommendations and Further Actions to be Taken
+                  </label>
+                  <textarea
+                    type="text"
+                    name="recommendations"
+                    id="recommendations"
+                    placeholder="recommendations"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    rows="4"
+                  >{{ entry_record.recommendations }}</textarea>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+  
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              Contact Information of Reporters
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-12/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Names of team members
+                  </label>
+                  <textarea
+                    type="text"
+                    name="names_of_team_members"
+                    id="names_of_team_members"
+                    placeholder="separate with comma(,)"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    rows="4"
+                  >{{ entry_record.names_of_team_members }}</textarea>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Committe Chairman Name
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.committee_chairman_name }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Committe chairman phone number
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.committee_chairman_phone }}" readonly/>
+                </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Committe chirman Rank
+                  </label>
+                  <input 
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                    type="text" value="{{ entry_record.committee_chairman_rank }}" readonly/>
+                </div>
+              </div>
+            </div>
+  
+            <hr class="mt-6 border-b-1 border-blueGray-300" />
+  
+            <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+              Data entry personnel
+            </h6>
+            <div class="flex flex-wrap">
+              <div class="w-full lg:w-6/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlfor="grid-password"
+                  >
+                    Data entered by
+                  </label>
+                  <input
+                    type="text"
+                    id="forms_entered_by"
+                    name="forms_entered_by"
+                    placeholder="full name"
+                    readonly
+                    value="{{ entry_record.forms_entered_by }}"
+                    class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  />
+                </div>
+              </div>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <div class="relative w-full mb-3">
+                  <label>Last modified: {{ entry_record.last_updated }}</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}
+

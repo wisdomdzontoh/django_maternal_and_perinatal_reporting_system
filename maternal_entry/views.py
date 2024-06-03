@@ -25,6 +25,15 @@ def view_all(request):
     return render(request, 'maternal_entry/view_all.html', context)
 
 
+#view a single entry
+def view_entry(request, id):
+    entry_record = MaternalEntry.objects.get(pk=id)
+    context = {
+        'entry_record': entry_record,
+    }
+    return render(request, 'maternal_entry/view_entry.html', context)
+
+
 
 #filter deaths
 @login_required(login_url="authentication:my-login")
@@ -260,7 +269,7 @@ def add_new(request):
 
 
 
-
+#filter deaths by district, facility name, name of deceased or status
 @login_required(login_url="authentication:my-login")
 def get_districts_and_facilities(request):
     if request.method == 'GET' and 'region_id' in request.GET and 'district_id' in request.GET:

@@ -104,7 +104,7 @@
       <th
         class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-extrabold bg-gray-50"
       >
-        Action
+        Preview
       </th>
     </tr>
   </thead>
@@ -162,7 +162,10 @@
       <td
         class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium"
       >
-        <i class="fa-solid fa-eye fa-2x"></i>
+      <a
+            href="{% url 'view_entry' maternal_death.id %}"
+            class="text-blue-900 hover:underline"
+            ><i class="fa-solid fa-eye fa-2x"></i></a>
       </td>
     </tr>
     {% endfor %} {% else %}
